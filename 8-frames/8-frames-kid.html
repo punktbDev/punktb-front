@@ -1,0 +1,1046 @@
+<script>
+    // Детская версия
+    // Перекидываем на конец теста если есть значение
+    if (localStorage.getItem("test-end")) {
+        location.href = "../testing-end?test-name=8FramesKid"
+    }
+</script>
+
+<script>
+    // Меняем название страницы
+    document.title = "8 кадров"
+
+    // Если нету manager-id В ссылке то перекинет на страницу с просьбой получить актуальную ссылку
+    let URLParams = Object.fromEntries(new URLSearchParams(window.location.search))
+    // Если в строке нету значения manager-id или он не цифра или значение пустое
+    if (!URLParams.hasOwnProperty("manager-id") || isNaN(URLParams["manager-id"]) || URLParams["manager-id"] === "") {
+        location.href = "../testing-end?no-manager-id=true"
+    }
+
+    // Получем сохраненные данные о тестировании
+    let questionsHash = JSON.parse(localStorage.getItem("questionsHash_8FramesKid"))
+    let isQuestionsHash = questionsHash ? true : false // Была ли информация взята из кэша
+
+    // Если объект = null - делаем его пустым объектом
+    if (!isQuestionsHash) {
+        questionsHash = {}
+    }
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+    :root {
+        --p-gray: #00000088;
+        --p-cian: #66CAA5;
+        --h-title: #BD92CE;
+
+        --border: #BD92CE;
+        --border-cian: #66CAA6;
+        --button: #BD92CE;
+        --input-bg: #DEC8E7;
+        --input-placeholder: #5E4967;
+
+        --dot-bg: #F1CD21;
+
+
+        --progress-width: 100%;
+    }
+    
+    body {
+        width: 100%;
+    }
+    
+    h2 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 48px;
+        line-height: 134%;
+    }
+    
+    h3 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 132%;
+    }
+    
+    p, .p1 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 400;
+        font-size: 20px; /* На этой странице 20 вместо 18 */
+        line-height: 21px;
+    }
+
+    .p1-strong {
+        font-family: 'Roboto';
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 112%;
+    }
+
+    .p-gray {
+        color: var(--p-gray);
+    }
+
+    .p-cut {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+
+    /* Стиль для ошибки инпута */
+    input.error {
+        animation: inputError 2s ease-in;
+    }
+
+    /* Анимацция ошибки */
+    @keyframes inputError {
+        0% {
+            border: 1px solid var(--border);
+        }
+
+        2% {
+            border: 1px solid #F40B0B;
+        }
+
+        100% {
+            border: 1px solid var(--border);
+        }
+    }
+</style>
+
+<style>
+    /* Логотип сверху слево */
+    #top-left-logo {
+        width: 128px;
+        
+        position: absolute;
+        top: 50px;
+        left: 100px;
+        
+    }
+    
+    #top-left-logo img {
+        width: 100%;
+    }
+</style>
+    
+<style>
+    article {
+        width: min(1440px, 100%); /* Ширина 1440px или 100% при сужении */
+        height: 800px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+        
+        margin: 0 auto; /* По центру страницы */
+    }
+    
+    
+    #form-aside {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 12px;
+    }
+
+
+    #form-aside h3 {
+        width: 403px;
+        height: 96px;
+
+        margin-right: 126px;
+    }
+
+    #form-aside p {
+        width: 403px;
+        height: 154px;
+
+        font-size: 20px;
+        line-height: 112%;
+
+        margin-right: 126px;
+    }
+
+    #form-aside h3 span, #form-aside p span {
+        color: var(--p-cian);
+    }
+</style>
+
+<style>
+    #form-section {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #form-section form {
+        width: 460px;
+        box-sizing: border-box;
+        padding: 42px 65px;
+
+        display: flex;
+        flex-direction: column;
+       
+        border: 1px solid var(--border);
+        border-radius: 10px;
+
+        margin-left: 67px;
+    }
+
+
+    #form-logo {
+        width: 100%;
+        height: 29px;
+        display: flex;
+        justify-content: center;
+
+        margin-bottom: 42px;
+    }
+    
+    #form-logo img {
+        width: 39px;
+        height: 29px;
+    }
+
+
+    form input {
+        display: block;
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        padding: 0 12px;
+
+        border: 1px solid var(--border);
+        border-radius: 10px;
+
+        margin-top: 4px;
+        margin-bottom: 29px;
+    }
+
+    #form-error {
+        color: #F40B0B;
+        margin-bottom: 12px;
+        visibility: hidden;
+    }
+
+    #form-error.show {
+        visibility: visible;
+    }
+
+    button {
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+
+        font-size: 18px !important;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: var(--button);
+        border-radius: 10px;
+        border: none;
+        outline: none;       
+        
+        transition: .15s all;
+        cursor: pointer;
+        color: #000000 !important;
+    }
+    
+    @media (hover: hover) {
+        button:hover {
+            background: #000000;
+            color: #FFFFFF !important;
+        }
+    }
+    
+    button:disabled {
+        background: #d1aedf;
+        color: #313131 !important;
+        cursor: not-allowed;
+    }
+</style>
+
+<style>
+    input[type="email"] {
+        margin-bottom: 12px;
+    }
+
+
+    /* Обработка персональной информации */
+    .form-checkbox {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+
+        margin-bottom: 20px;
+    }
+
+    #label-policy {
+        width: calc(100% - 12px - 15px);
+        font-size: 12px;
+        line-height: 112%;
+        cursor: pointer;
+    }
+
+    #label-policy span {
+        font-size: 12px;
+        line-height: 112%;
+        cursor: pointer;
+        display: inline;
+
+        font-weight: 500;
+        color: var(--h-title);
+    }
+
+    @media (hover: hover) {
+        #label-policy span:hover {
+            text-decoration: underline;
+        }
+    }
+
+    @media (hover: none) {
+        #label-policy span {
+            text-decoration: underline;
+        }
+    }
+
+    #policy {
+        width: 15px;
+        height: 15px;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        border-radius: 3px;
+        border: 1px solid var(--border);
+        background-color: #ffffff;
+
+    }
+
+    #policy.checked {
+        background-color: var(--border);
+    }
+</style>
+
+<style>
+    .article-content {
+        height: auto;
+        flex-direction: column;
+        position: relative;
+
+        box-sizing: border-box;
+        padding: 0 80px 70px 80px; /* На 70px снизу меньше так как снизу плашка от тильды */
+    }
+
+
+    #section-content {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Заголовок страницы */
+    #section-title {
+        width: 100%;
+        height: 60px;
+
+        text-transform: uppercase;
+        text-align: center;
+
+        color: var(--h-title);
+        font-weight: 400;
+
+        margin-top: 52px;
+    }
+
+
+    /* Контейнер двух колонн */
+    .section-content__columns-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+
+        margin-top: 194px;
+        overflow: visible;
+    }
+
+
+    .section-content__column {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .section-content__column:first-of-type {
+        align-items: flex-end;
+    }
+
+
+    .section-content__block {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        
+        position: relative;
+    }
+
+    .section-content__block h3 {
+        color: #141212;
+        font-weight: 400;
+        line-height: 117%;
+    }
+
+    .section-content__block h3 span {
+        color: #141212;
+        font-weight: 700;
+    }
+
+
+    .order {
+        width: 77px;
+        height: 77px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--border);
+
+        position: absolute;
+        z-index: 1;
+    }
+
+    .order h3 {
+        color: #FFFFFF;
+        margin-bottom: 0 !important;
+    }
+
+
+    .section-content__cian-left {
+        width: 100%;
+
+        box-sizing: border-box;
+        padding: 125px 20px 80px 100px;
+        border-radius: 300px 0px 0px 0px;
+        background: var(--border-cian);
+
+        margin-top: 120px;
+    }
+
+    .section-content__cian-left h3:first-of-type {
+        line-height: 134%;
+    }
+
+    .section-content__cian-left .order {
+        top: -24px;
+        left: -38px;
+    }
+
+
+    .section-content__yellow-right {
+        width: 100%;
+
+        box-sizing: border-box;
+        padding: 125px 20px 155px 100px;
+        border-radius: 300px 0px 0px 0px;
+        background: #FFE272;
+
+        margin-top: 0;
+    }
+
+    .section-content__yellow-right h3:first-of-type {
+        margin-bottom: 20px;
+    }
+
+    .section-content__yellow-right h3:not(:first-of-type) {
+        position: relative;
+    }
+
+    .section-content__yellow-right h3:not(:first-of-type)::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: var(--border);
+
+        position: absolute;
+        top: 4px;
+        left: -40px;
+    }
+
+    .section-content__yellow-right .order {
+        top: -39px;
+        left: 0px;
+    }
+
+
+    .section-content__purple-left {
+        width: 100%;
+
+        box-sizing: border-box;
+        padding: 125px 20px 80px 80px;
+        border-radius: 300px 0px 0px 0px;
+        background: #BD92CE;
+
+        margin-top: 40px;
+    }
+
+    .section-content__purple-left > h3 {
+        width: 100%;
+
+        margin-bottom: 20px;
+    }
+
+    .text-block {
+        display: flex;
+        gap: 20px;
+
+        margin-left: 20px;
+    }
+
+    .text-block h3 {
+        width: 460px;
+    }
+
+    .text-block svg {
+        margin-top: 4px;
+    }
+
+    .section-content__purple-left .order {
+        top: 5px;
+        left: -46px;
+    }
+
+
+    .section-content__cian-right {
+        width: 100%;
+
+        box-sizing: border-box;
+        padding: 125px 75px 80px 40px;
+        border-radius: 0px 300px 0px 0px;
+        background: var(--border-cian);
+        gap: 40px;
+
+        margin-top: 40px;
+    }
+
+    .section-content__cian-right .order {
+        top: 0;
+        right: -38px;
+    }
+
+
+    #section-sub-title {
+        text-transform: uppercase;
+
+        color: var(--h-title);
+        font-weight: 400;
+
+        margin-top: 80px;
+        margin-right: 300px;
+    }
+
+
+    .section-inputs {
+        width: 100%;
+        height: 920px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 40px 80px;
+
+        margin-top: 80px;
+    }
+    
+    .section-inputs__block {
+        width: calc(50% - 40px);
+        height: 200px;
+
+        position: relative;
+    }
+
+    .section-inputs__block h3 {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+
+        font-size: 32px;
+        font-weight: 500;
+    }
+
+    .section-inputs__block textarea {
+        width: 100%;
+        height: 100%;
+        resize: none;
+
+        box-sizing: border-box;
+        padding-left: 80px;
+        padding-top: 32px;
+        border-radius: 20px;
+        border: 2px solid var(--border);
+
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 21px;
+    }
+
+    .section-inputs__block textarea::-webkit-scrollbar {
+        display: none;
+    }
+
+    #button-end, #button-back {
+        width: 720px;
+        height: 80px;
+
+        border-radius: 20px;
+
+        font-size: 32px !important;
+        font-weight: 500;
+
+        margin-top: 40px;
+    }
+
+    #button-end {
+        margin-top: 80px;
+    }
+</style>
+
+<article>
+    <div id="top-left-logo">    
+        <img src="https://static.tildacdn.com/tild6630-3237-4638-a534-313664333931/___.svg" alt="logo">
+    </div>
+    
+    <aside id="form-aside">
+        <h3>После заполнения анкеты вам откроется доступ к диагностике<br><span>«8 кадров»</span></h3>
+        <p>Диагностика поможет узнать, какие виды деятельности вам подходят больше всего.<br>Пожалуйста, внимательно прочитайте инструкцию, прежде чем переходить к самой диагностике. Инструкция будет доступна вам после заполнения данной формы.</p>
+    </aside>
+
+    <section id="form-section">
+        <form>
+            <div id="form-logo">
+                <img src="https://sun9-33.userapi.com/impg/o7UasFLuPHffAw7M354dhIyAw-ywr1TdpgWp7w/AU35d9CQutY.jpg?size=192x140&quality=96&sign=65f29d920ee520f801e55492621ceaed&type=album" alt="mini-logo">
+            </div>
+
+            <label class="p1" for="form-name">ФИО</label>
+            <input class="p1" type="text" id="form-name" name="form-name" maxlength="100" required>
+
+            <label class="p1" for="form-phone">Телефон</label>
+            <input class="p1" type="tel" id="form-phone" name="form-phone" maxlength="20" required>
+
+            <label class="p1" for="form-email">Email</label>
+            <input class="p1" type="email" id="form-email" name="form-email" maxlength="100" required>
+
+            <p id="form-error">Неверный формат ФИО</p>
+
+            <div class="form-checkbox">
+                <div id="policy"></div>
+                <label id="label-policy" for="policy" class="p1">Я принимаю условия <span>Пользовательского соглашения</span> и даю свое <span>согласие на обработку персональных данных</span> в соответствии с <span>Политикой</span>.</label>
+            </div>
+            
+
+            <button class="p1" type="submit" id="submit-form">Далее</button>
+        </form>
+    </section>
+
+
+    <!-- Контент диагностики -->
+    <section id="section-content" class="hidden">
+        <div class="section-content__columns-container">
+            <!-- Левая колонна -->
+            <div class="section-content__column">
+                <h2 id="section-title" class="hidden">«8 кадров»</h2>
+
+                <div class="section-content__block section-content__cian-left">
+                    <div class="order"><h3>1</h3></div>
+
+                    <h3>Задание, в котором очень важно помечтать.</h3>
+                    <h3>В этом задании тебе нужно представить, что у тебя появилась возможность прожить не одну, а целых 8 жизней. И все они твои!</h3>
+                    <h3>Не надо выбирать один вариант «что делать». Можно прожить все 8 жизней. Твои 8 идеальных профессиональных жизней.</h3>
+                    <h3><span>Какие они, эти идеальные  8 сценариев  ПРО  ТВОЮ БУДУЩУЮ ЖИЗНЬ?</span> Что ты в каждом из 8 сценариев делаешь? Где живешь? Чем занимаешься?</h3>
+                </div>
+
+                <div class="section-content__block section-content__purple-left">
+                    <div class="order"><h3>3</h3></div>
+
+                    <h3><span>В каждой жизни у тебя должна быть ровно 1 профессия. Профессия может быть любой, но повторяться нельзя.</span><br>И нельзя в этом задании использовать варианты:</h3>
+                    <div class="text-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M16.4223 8.21114C17.8964 8.94819 17.8964 11.0518 16.4223 11.7889L2.89443 18.5528C1.56463 19.2177 0 18.2507 0 16.7639V3.23607C0 1.7493 1.56462 0.782312 2.89443 1.44721L16.4223 8.21114Z" fill="#F1CD21"/>
+                        </svg>
+                        <h3>нарушающие законы (киллер, увы, нет)</h3>
+                    </div>
+                    <div class="text-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M16.4223 8.21114C17.8964 8.94819 17.8964 11.0518 16.4223 11.7889L2.89443 18.5528C1.56463 19.2177 0 18.2507 0 16.7639V3.23607C0 1.7493 1.56462 0.782312 2.89443 1.44721L16.4223 8.21114Z" fill="#F1CD21"/>
+                        </svg>
+                        <h3>волшебные (феей тоже в другой раз)</h3>
+                    </div>
+                    <div class="text-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M16.4223 8.21114C17.8964 8.94819 17.8964 11.0518 16.4223 11.7889L2.89443 18.5528C1.56463 19.2177 0 18.2507 0 16.7639V3.23607C0 1.7493 1.56462 0.782312 2.89443 1.44721L16.4223 8.21114Z" fill="#F1CD21"/>
+                        </svg>
+                        <h3>не имеющие отношения к нашему времени (гладиатор или жрец у ацтеков тоже отпадает)</h3>
+                    </div>
+                </div>
+
+                <h2 id="section-sub-title">Удачи!</h2>
+            </div>
+
+            <!-- Правая колонна -->
+            <div class="section-content__column jq-second-column">
+                <div class="section-content__block section-content__yellow-right">
+                    <div class="order"><h3>2</h3></div>
+
+                    <h3>Важно, чтобы каждый из 8 сценариев содержал:</h3>
+                    <h3>твою профессию</h3>
+                    <h3>где живёшь и чем занимаешься</h3>
+                    <h3>в чем чувствуешь себя полезным, какую пользу приносишь другим</h3>
+                    <h3>что тебя больше всего вдохновляет именно в этом сценарии (от чего ты особенно счастлив в этом варианте профессиональной жизни)</h3>
+                </div>
+
+                <div class="section-content__block section-content__cian-right">
+                    <div class="order"><h3>4</h3></div>
+
+                    <h3>Пример, как правильно делать это задание (как это может выглядеть):</h3>
+                    <h3>Сценарий  1: Психолог, живу в Новосибирске, консультирую клиентов и провожу исследования работы мозга, вдохновляет, что я помогаю людям сохранять отношения друг с другом. Счастлив от того, что много общаюсь с людьми и помогаю им изменить их жизнь»</h3>
+                    <h3>Любые дополнительные детали приветствуются.</h3>
+                    <h3>И, да, <span>это ОДНО ИЗ САМЫХ ГЛАВНЫХ ЗАДАНИЙ  ПРОГРАММЫ.</span></h3>
+                    <h3>Пожалуйста, отнесись  к нему ответственно! Удели ему время и помечтай о разных вариантах своей жизни!</h3>
+                    <h3>Жду твои  8 сценариев до <span>21:00</span> завтрашнего дня!</h3>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Инпуты в конце -->
+        <div class="section-inputs">
+            <div class="section-inputs__block">
+                <h3>1.</h3>
+                <textarea id="input-1" maxlength="1000"></textarea>
+            </div>
+            <div class="section-inputs__block">
+                <h3>2.</h3>
+                <textarea id="input-2" maxlength="1000"></textarea>
+            </div>
+            <div class="section-inputs__block">
+                <h3>3.</h3>
+                <textarea id="input-3" maxlength="1000"></textarea>
+            </div>
+            <div class="section-inputs__block">
+                <h3>4.</h3>
+                <textarea id="input-4" maxlength="1000"></textarea>
+            </div>
+            <div class="section-inputs__block">
+                <h3>5.</h3>
+                <textarea id="input-5" maxlength="1000"></textarea>
+            </div>
+            <div class="section-inputs__block">
+                <h3>6.</h3>
+                <textarea id="input-6" maxlength="1000"></textarea>
+            </div>
+            <div class="section-inputs__block">
+                <h3>7.</h3>
+                <textarea id="input-7" maxlength="1000"></textarea>
+            </div>
+            <div class="section-inputs__block">
+                <h3>8.</h3>
+                <textarea id="input-8" maxlength="1000"></textarea>
+            </div>
+        </div>
+
+
+        <!-- Кнопки в конце -->
+        <button id="button-end" disabled>Отправить</button>
+        <button id="button-back">Назад</button>
+    </section>
+</article>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    // Пометить инпут ошибкой
+    function inputError(selector) {
+        // Если у инпута нету класса ошибки - добавляем и через 2 секунды удаляем
+        if (!$(selector).hasClass("error")) {
+            $(selector).addClass("error")
+            setTimeout(() => {$(selector).removeClass("error")}, 2000)
+        }
+    }
+
+
+    // Если пользователь валидно заполнил форму и данные сохранились в хэш, то заполняем поля
+    let hashUserFormData = JSON.parse(localStorage.getItem("userFormData"))
+    if (hashUserFormData) {
+        $("#form-name").val(hashUserFormData.formName)
+        $("#form-phone").val(hashUserFormData.formPhone)
+        $("#form-email").val(hashUserFormData.formEmail)
+        // Активируем галочку
+        $("#policy").toggleClass("checked")
+    }
+
+
+    $("#form-name").change(() => { // Удаление лишних пробелов
+        $("#form-name").val($("#form-name").val().replace(/ +/g, ' ').trim())
+    })
+
+    $("#form-phone").change(() => { // Удаление пробелов
+        $("#form-phone").val($("#form-phone").val().replace(/ /g,''))
+    })
+
+    $("#form-email").change(() => { // Удаление пробелов
+        $("#form-email").val($("#form-email").val().replace(/ /g,''))
+    })
+
+
+    // Галочка 
+    $("#policy").on("click tap", () => {
+        $("#policy").toggleClass("checked")
+    })
+
+    // Клик тексту после галочки
+    $("#label-policy").on("click tap", () => {
+        $("#policy").addClass("checked")
+    })
+
+    // Клик по политике
+    $("#label-policy span").on("click tap", () => {
+        window.open("../policy", "_blank")
+    })
+
+
+    // Ивент submit у формы входа
+    const form = document.querySelector('form')
+    form.addEventListener('submit', (event) => {
+        // Отключение базового перехода
+        event.preventDefault()
+
+        // Отключаем кнопку на 2 секунды
+        $("#submit-form").attr("disabled", "disabled")
+        setTimeout(() => {
+            $("#submit-form").removeAttr("disabled")
+        }, 2000)
+
+
+        // Получаем поля из фомы
+        const formData = new FormData(form)
+        const formName = formData.get("form-name")
+        const formPhone = formData.get("form-phone")
+        const formEmail = formData.get("form-email")
+        
+        // В поле ФИО должно быть ровно 3 слова
+        if (formName.split(" ").length !== 3) {
+            inputError("#form-name")
+
+            // Ставим текст ошибки
+            $("#form-error").text("Неверный формат ФИО")
+            $("#form-error").addClass("show")
+            setTimeout(() => {
+                $("#form-error").removeClass("show")
+            }, 2000)
+            return
+        }
+
+        // Проверка поля Телефона на регулрном выражении
+        let rePhone = /^[\d\+][\d\(\)\ -]{9,14}\d$/
+        if (!rePhone.test(formPhone)) {
+            inputError("#form-phone")
+            // Ставим текст ошибки
+            $("#form-error").text("Неверный номер телефона")
+            $("#form-error").addClass("show")
+            setTimeout(() => {
+                $("#form-error").removeClass("show")
+            }, 2000)
+            return
+        }
+
+        // Проверка поля Почты на регулрном выражении
+        let reEmail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i
+        if (!reEmail.test(formEmail)) {
+            inputError("#form-email")
+            // Ставим текст ошибки
+            $("#form-error").text("Неверный email")
+            $("#form-error").addClass("show")
+            setTimeout(() => {
+                $("#form-error").removeClass("show")
+            }, 2000)
+            return
+        }
+
+        if (!$("#policy").hasClass("checked")) {
+            // Ставим текст ошибки
+            $("#form-error").text("Отметьте поле")
+            $("#form-error").addClass("show")
+            setTimeout(() => {
+                $("#form-error").removeClass("show")
+            }, 2000)
+            return
+        }
+
+
+        $("#form-aside").addClass("hidden")
+        $("#form-section").addClass("hidden")
+        $("#section-title").removeClass("hidden")
+        $("#section-content").removeClass("hidden")
+
+        // Класс для корректного отображения
+        $("article").addClass("article-content")
+
+
+
+        // Сохраняем информацию в хэш
+        let userFormData = {
+            formName: formName,
+            formPhone: formPhone,
+            formEmail: formEmail,
+        }
+
+        localStorage.setItem("userFormData", JSON.stringify(userFormData))
+
+        // Когда заполнили все поля и нажали "Далее", то рендерит Правила
+    })
+</script>
+
+<script>
+    // Вернуться обратно в форму
+    $("#button-back").on("click tap", () => {
+        $("#form-aside").removeClass("hidden")
+        $("#form-section").removeClass("hidden")
+        $("#section-title").addClass("hidden")
+        $("#section-content").addClass("hidden")
+
+        // Класс для корректного отображения
+        $("article").removeClass("article-content")
+    })
+
+
+    // Автозаполнение полей с ответами
+    if (isQuestionsHash) {
+        for (inputId in questionsHash) {
+            $("#" + inputId).val(questionsHash[inputId])
+        }
+    }
+
+
+    // Сохранение ответов
+    $(".section-inputs__block textarea").on("input", (event) => {
+        let inputId = event.currentTarget.id
+        questionsHash[inputId] = $("#" + inputId).val()
+
+        // Сохраняем ответы после записи
+        localStorage.setItem("questionsHash_8FramesKid", JSON.stringify(questionsHash))
+
+
+        // Если всего ответов 8
+        if (Object.keys(questionsHash).length === 8) {
+            // Если нету пустых ответов
+            if (!Object.values(questionsHash).includes("")) {
+                $("#button-end").removeAttr("disabled")
+            } else {
+                // Если есть, то ставим кнопку неактивной
+                $("#button-end").attr("disabled", "disabled")
+            }
+        }
+    })
+
+    $(".section-inputs__block textarea").change((event) => {
+        $("#" + event.currentTarget.id).val($("#" + event.currentTarget.id).val().replace(/ +/g, ' ').trim())
+        $(".section-inputs__block textarea").trigger("input")
+    })
+
+    // Триггерим инпуты, что бы при заполненых ответах кнопка разблокировалась
+    $(".section-inputs__block textarea").trigger("input")
+
+    
+    // Отправка ответов
+    $("#button-end").on("click tap", () => {
+        $("#button-end").attr("disabled", "disabled")
+        setTimeout(() => {
+            $("#button-end").removeAttr("disabled")
+        }, 5000)
+
+        // Проверка, если не все поля заполнены
+        if (Object.values(questionsHash).includes("")) {
+           return
+        }
+
+        // Получаем информацию о пользователе
+        let userFormData = JSON.parse(localStorage.getItem("userFormData"))
+        
+        // Массив который отправиться
+        let sendData = {
+        // id: Установиться в google scripts
+            "manager_id": parseInt(URLParams["manager-id"]),
+            "name": userFormData.formName,
+            "phone": userFormData.formPhone,
+            "email": userFormData.formEmail,
+            "new": true,
+            "result": {
+                "diagnostic-id": 11, // Для этой диагностики id = 11 (Детская версия)
+                "data": questionsHash,
+                "date": Date.now() // Дата текущего прохождения
+            },
+            "in_archive": false,
+            "date": Date.now() // Дата последней активности
+        }
+        
+        // Api запрос в таблицу с результатами
+        function DBsendResults(data, func) {
+            $.ajax({
+                url: "https://planb-service.ru/api/v1/client/result",
+                method: "POST",
+                data: JSON.stringify(data),
+                success: func
+            })
+        }
+
+        DBsendResults(sendData, (data) => {
+            // Информация отправляется и перекидывает на конец тестирования
+
+            // Добавляем значение в хэш что бы после перезагрузки перекинуло на концовку
+            localStorage.setItem("test-end", "test-end")
+            location.reload()
+        })
+    })
+</script>
+
+<script>
+    $( document ).ready(() => {
+        $( window ).on( "resize", function() {
+            let width = document.body.clientWidth
+
+            if (width <= 984) {
+                $(".section-content__cian-left").after($(".section-content__yellow-right"))
+                $(".section-content__purple-left").after($(".section-content__cian-right"))
+
+            } else {
+                $(".jq-second-column").append($(".section-content__yellow-right"))
+                $(".jq-second-column").append($(".section-content__cian-right"))
+            }
+        })
+
+        let width = document.body.clientWidth
+
+        if (width <= 984) {
+            $(".section-content__cian-left").after($(".section-content__yellow-right"))
+            $(".section-content__purple-left").after($(".section-content__cian-right"))
+        } else {
+            $(".jq-second-column").append($(".section-content__yellow-right"))
+            $(".jq-second-column").append($(".section-content__cian-right"))
+        }
+    })
+</script>

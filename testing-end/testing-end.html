@@ -1,0 +1,243 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+    :root {
+        --p-gray: #00000088;
+        --p-cian: #66CAA5;
+        --h-title: #BD92CE;
+        
+        --border: #BD92CE;
+        --button: #BD92CE;
+        --input-bg: #DEC8E7;
+        --input-placeholder: #5E4967;
+
+        --dot-bg: #F1CD21;
+    }
+    
+    body {
+        width: 100%;
+        height: auto;
+    }
+    
+    h2 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 48px;
+        line-height: 134%;
+    }
+    
+    h3 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 132%;
+    }
+    
+    p, .p1 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 400;
+        font-size: 20px; /* На этой странице 20 вместо 18 */
+        line-height: 21px;
+    }
+
+    .p1-strong {
+        font-family: 'Roboto';
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 112%;
+    }
+
+    .p-gray {
+        color: var(--p-gray);
+    }
+
+    .p-cut {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+</style>
+
+<style>
+    /* Логотип сверху слево */
+    #top-left-logo {
+        width: 128px;
+        
+        position: absolute;
+        top: 50px;
+        left: 100px;
+        
+    }
+    
+    #top-left-logo img {
+        width: 100%;
+    }
+</style>
+    
+<style>
+    article {
+        width: min(1440px, 100%); /* Ширина 1440px или 100% при сужении */
+        height: 800px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+        
+        margin: 0 auto; /* По центру страницы */
+    }
+
+
+    section {
+        width: 661px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        margin: 0 auto; /* По центру страницы */
+    }
+
+
+    #big-logo {
+        width: 100%;
+        height: 140px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #big-logo img {
+        width: 192px;
+        height: 140px;
+    }
+
+    section h3 {
+        width: 100%;
+
+        margin-top: 36px;
+    }
+</style>
+
+<article>
+    <div id="top-left-logo">
+        <img src="https://static.tildacdn.com/tild6630-3237-4638-a534-313664333931/___.svg" alt="logo">
+    </div>
+
+    <section>
+        <div id="big-logo">
+            <img src="https://sun9-33.userapi.com/impg/o7UasFLuPHffAw7M354dhIyAw-ywr1TdpgWp7w/AU35d9CQutY.jpg?size=192x140&quality=96&sign=65f29d920ee520f801e55492621ceaed&type=album" alt="big-logo">
+        </div>
+        <h3 id="message">Спасибо за ваши ответы! Они помогут в подготовке рекомендаций для вас. Детали расскажет ваш консультант после изучения результатов диагностики.</h3>
+    </section>
+</article>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    // Функция выывается сразу. Если ошибок небыло, то удаляется вся информация о прохождении теста, но не о пользователе
+    (function () {
+        // Если в ссылке указана ошибка "no-manager-id" со значением true, то выдает сообщение
+        let URLParams = Object.fromEntries(new URLSearchParams(window.location.search))
+        if (URLParams["no-manager-id"]) {
+            $("#message").text("Вы перешли по неправильной ссылке! Актуальную ссылку на тестирование попросите у профориентолога!")
+            return
+        }
+
+
+        // Очищаем данные о прохождении если небыло никаких ошибок
+        localStorage.removeItem("test-end")
+
+        // Очищаем поля для определенного теста, а не все ответы сразу
+        if (URLParams["test-name"]) {
+            // 43 профессии
+            if (URLParams["test-name"] === "43Professions") {
+                localStorage.removeItem("questionsHash_43Professions")
+                localStorage.removeItem("questionsHash_43ProfessionsOpenAnswer")
+            }
+
+
+            // 10 Любимых дел (Ребенок)
+            if (URLParams["test-name"] === "10FavoriteThingsKid") {
+                localStorage.removeItem("questionsHash_10FavoriteThingsKid")
+            }
+
+            // 10 Любимых дел (Взрослый)
+            if (URLParams["test-name"] === "10FavoriteThings") {
+                localStorage.removeItem("questionsHash_10FavoriteThings")
+            }
+
+
+            // Идеальная работа (Ребенок)
+            if (URLParams["test-name"] === "perfectJobKid") {
+                localStorage.removeItem("questionsHash_perfectJobKid")
+            }
+
+            // Идеальная работа (Взрослый)
+            if (URLParams["test-name"] === "perfectJob") {
+                localStorage.removeItem("questionsHash_perfectJob")
+            }
+
+
+            // Мои потребности (Ребенок)
+            if (URLParams["test-name"] === "myNeedsKid") {
+                localStorage.removeItem("questionsHash_myNeedsKid")
+            }
+
+            // Мои потребности (Взрослый)
+            if (URLParams["test-name"] === "myNeeds") {
+                localStorage.removeItem("questionsHash_myNeeds")
+            }
+
+
+            // Антирейтинг профессий (Ребенок)
+            if (URLParams["test-name"] === "antiratingOfProfessionsKid") {
+                localStorage.removeItem("questionsHash_antiratingOfProfessionsKid")
+            }
+
+            // Антирейтинг профессий (Взрослый)
+            if (URLParams["test-name"] === "antiratingOfProfessions") {
+                localStorage.removeItem("questionsHash_antiratingOfProfessions")
+            }
+
+
+            // Интервью (Ребенок)
+            if (URLParams["test-name"] === "interviewKid") {
+                localStorage.removeItem("questionsHash_interviewKid")
+            }
+
+            // Интервью (Взрослый)
+            if (URLParams["test-name"] === "interview") {
+                localStorage.removeItem("questionsHash_interview")
+            }
+
+
+            // 8 кадров (Ребенок)
+            if (URLParams["test-name"] === "8FramesKid") {
+                localStorage.removeItem("questionsHash_8FramesKid")
+            }
+
+            // 8 кадров (Взрослый)
+            if (URLParams["test-name"] === "8Frames") {
+                localStorage.removeItem("questionsHash_8Frames")
+            }
+
+
+            // Исследование ценностей
+            if (URLParams["test-name"] === "exploringValues") {
+                localStorage.removeItem("questionsHash_exploringValues")
+            }
+
+
+            // Учебная мотивация
+            if (URLParams["test-name"] === "learningMotivation") {
+                localStorage.removeItem("questionsHash_learningMotivation")
+                localStorage.removeItem("questionsHash_learningMotivationGender")
+            }
+        }
+    }())
+</script>

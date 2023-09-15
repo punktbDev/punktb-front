@@ -1,0 +1,418 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+    :root {
+        --p-gray: #00000088;
+        --p-cian: #66CAA5;
+        --h-title: #BD92CE;
+
+        --border: #BD92CE;
+        --button: #BD92CE;
+        --input-bg: #DEC8E7;
+        --input-placeholder: #5E4967;
+
+        --dot-bg: #F1CD21;
+    }
+    
+    body {
+        width: 100%;
+    }
+    
+    h2 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 48px;
+        line-height: 134%;
+    }
+    
+    h3 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 132%;
+    }
+    
+    p, .p1 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+    }
+
+    .p1-strong {
+        font-family: 'Roboto';
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 112%;
+    }
+
+    .p-gray {
+        color: var(--p-gray);
+    }
+
+    .p-cut {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+
+    /* Стиль для ошибки инпута */
+    input.error {
+        animation: inputError 2s ease-in;
+    }
+
+    /* Анимацция ошибки */
+    @keyframes inputError {
+        0% {
+            border: 1px solid var(--border);
+        }
+
+        2% {
+            border: 1px solid #F40B0B;
+        }
+
+        100% {
+            border: 1px solid var(--border);
+        }
+    }
+</style>
+
+<style>
+    /* Логотип сверху слево */
+    #top-left-logo {
+        width: 128px;
+        
+        position: absolute;
+        top: 50px;
+        left: 100px;
+        
+    }
+    
+    #top-left-logo img {
+        width: 100%;
+    }
+</style>
+    
+<style>
+    article {
+        width: min(1440px, 100%); /* Ширина 1440px или 100% при сужении */
+        height: calc(800px - 70px); /* На 70px меньше так как снизу плашка от тильды */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+        
+        margin: 0 auto; /* По центру страницы */
+    }
+    
+    
+    aside {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    
+    aside h2 {
+        width: 404px;
+        
+        margin-top: 68px;
+        margin-right: 124px;
+    }
+    
+    aside h2 span {
+        color: var(--p-cian);
+    }
+</style>
+
+<style>
+    section {
+        width: 50%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    
+    
+    form {
+        width: 460px;
+        box-sizing: border-box;
+        padding: 58px 80px 40px 80px;
+        position: relative;
+        
+        display: flex;
+        flex-direction: column;
+        
+        border: 1px solid var(--border);
+        border-radius: 10px;
+
+        margin-top: 30px;
+        margin-left: 66px;
+    }
+    
+    #form-logo {
+        position: absolute;
+        top: 42px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #form-logo img {
+        width: 39px;
+        height: 29px;
+    }
+
+    form h3 {
+        font-weight: 400;
+
+        margin-bottom: 44px;
+    }
+
+    form label {
+        margin-bottom: 4px;
+    }
+
+
+    .password-input {
+        width: 100%;
+        height: 40px;
+        position: relative;
+
+        border-radius: 10px;
+    }
+
+
+    /* Кнопка просмотра пароля */
+    .password-input img {
+        width: 20px;
+        height: 20px;
+
+        position: absolute;
+        right: 20px;
+        top: 10px;
+
+        opacity: .5;
+        cursor: pointer;
+        transition: .15s all;
+    }
+
+    @media (hover: hover) {
+        .password-input img:hover {
+            opacity: 1;
+        }
+    }
+
+    @media (hover: none) {
+        .password-input img {
+            opacity: 1;
+        }
+    }
+    
+    form input {
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        padding: 0 12px;
+        
+        border: 1px solid var(--border);
+        border-radius: 10px;
+
+        margin-bottom: 30px;
+    }
+
+    form input[name="password"] {
+        padding: 0 52px 0 12px;
+        
+        margin-bottom: 0;
+    }
+    
+    form button[type="submit"] {
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        
+        background: var(--border);
+        border-radius: 10px;
+        border: none;
+        outline: none;       
+        
+        transition: .15s all;
+        cursor: pointer;
+        
+        margin-bottom: 38px;
+    }
+    
+    @media (hover: hover) {
+        form button[type="submit"]:hover {
+            background: #000000;
+            color: #FFFFFF;
+        }
+    }
+    
+    form button[type="submit"]:disabled {
+        background: #d1aedf;
+        color: #313131;
+        cursor: not-allowed;
+    }
+    
+
+    #forgot-password {
+        text-align: center;
+        color: var(--p-gray);
+        cursor: pointer;
+    }
+    
+    @media (hover: hover) {
+        #forgot-password:hover {
+            text-decoration: underline;
+        }
+    }
+
+    @media (hover: none) {
+        #forgot-password {
+            text-decoration: underline;
+        }
+    }
+
+
+    /* Текст ошибки */
+    #login-error {
+        color: #F40B0B;
+        margin: 12px 0;
+        visibility: hidden;
+        word-wrap: break-word;
+    }
+
+    #login-error.show {
+        visibility: visible;
+    }
+</style>
+
+<article>
+    <div id="top-left-logo">
+        <img src="https://static.tildacdn.com/tild6630-3237-4638-a534-313664333931/___.svg" alt="logo">
+    </div>
+    
+    <aside>
+        <h2>Личный кабинет <span>профориентолога</span></h2>
+    </aside>
+    <section>
+        <form>
+            <div id="form-logo">
+                <img src="https://sun9-33.userapi.com/impg/o7UasFLuPHffAw7M354dhIyAw-ywr1TdpgWp7w/AU35d9CQutY.jpg?size=192x140&quality=96&sign=65f29d920ee520f801e55492621ceaed&type=album" alt="mini-logo">
+            </div>
+            
+            <h3>Вход</h3>
+            
+            <label class="p1" for="login">Логин</label>
+            <input class="p1" type="login" name="login" id="login-input" minlength="1" maxlength="100" required>
+            
+            <label class="p1" for="password">Пароль</label>
+            <div class="password-input">
+                <input class="p1" type="password" name="password" id="password-input" minlength="1" maxlength="100" required>
+                <img id="password-show" src="https://sun9-22.userapi.com/impg/dxnTH0YfbX30oSu95YgdwUBfTKQTNre2pR4spQ/RX2l5PyoxX4.jpg?size=20x20&quality=96&sign=97393bbce30213c930243aa178f6fbec&type=album" alt="show-password">
+            </div>
+            
+            <p id="login-error">Неверный логин или пароль</p>
+
+            <button class="p1" id="login-submit" type="submit">Войти</button>
+
+            <p class="p1" id="forgot-password">Забыли пароль?</p>
+        </form>
+    </section>
+</article>
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    // Пометить инпут ошибкой
+    function inputError(selector) {
+        // Если у инпута нету класса ошибки - добавляем и через 2 секунды удаляем
+        if (!$(selector).hasClass("error")) {
+            $(selector).addClass("error")
+            setTimeout(() => {$(selector).removeClass("error")}, 2000)
+        }
+    }
+
+    // Ивент submit у формы входа
+    const form = document.querySelector('form')
+    form.addEventListener('submit', (event) => {
+        // Отключаем кнопку на 2 секунды
+        $("#login-submit").attr("disabled", "disabled")
+        setTimeout(() => {
+            $("#login-submit").removeAttr("disabled")
+        }, 2000)
+
+        // Получаем поля из фомы
+        const formData = new FormData(form)
+        const formLogin = formData.get("login").trim()
+        const formPassword = formData.get("password").trim()
+
+
+        // Функция авторизации
+        $.ajax({
+            url: "https://planb-service.ru/api/v1/login",
+            method: "GET",
+            headers: {
+                "Authorization": "Basic " + btoa(formLogin + ":" + formPassword),
+            },
+            success: (data) => {
+                data.login = formLogin
+                data.password = formPassword
+
+                // При успехе удаляем старые данные и сохраняем новые и переноси в кабинет
+                localStorage.removeItem("userData")
+                localStorage.setItem("userData", JSON.stringify(data))
+
+                if (data.is_admin) {
+                    location.href = "../admin"
+                } else {
+                    location.href = "../cabinet"
+                }
+            },
+            error: (error) => {
+                inputError("#login-input")
+                inputError("#password-input")
+
+                // Ставим текст ошибки
+                $("#login-error").addClass("show")
+                setTimeout(() => {
+                    $("#login-error").removeClass("show")
+                }, 2000)
+            }
+        })
+
+        // Отключение базового перехода
+        event.preventDefault()
+    })
+
+
+    // Кнопка "забыли пароль"
+    $("#forgot-password").on("click tap", () => {
+        window.open("../forgot-password", "_blank")
+    })
+
+
+    // Просмотр пароля у поля пароль
+    $("#password-show").on("click tap", () => {
+        // По нажатию проверка, если инпут внутри с типом "Пароль", то меняется картинка и тип на "Текст"
+        if ($("#password-input").attr("type") === "password") {
+            $("#password-show").attr("src", "https://sun9-9.userapi.com/impg/QUqWeT558rMWZb9qXEnFINCBw9GeXUP7kfOABA/ffmOtqJTi_Y.jpg?size=20x20&quality=96&sign=e04699c99774ca3b38a39f486aa17b1a&type=album")
+            $("#password-input").attr("type", "text")
+            return
+        }
+
+        // Если тип "Текст", то возвращаем пароль и иконку открытого глаза
+        $("#password-show").attr("src", "https://sun9-22.userapi.com/impg/dxnTH0YfbX30oSu95YgdwUBfTKQTNre2pR4spQ/RX2l5PyoxX4.jpg?size=20x20&quality=96&sign=97393bbce30213c930243aa178f6fbec&type=album")
+        $("#password-input").attr("type", "password")
+    })
+</script>
+
+<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+<!-- https://194.87.101.138:9043 -->

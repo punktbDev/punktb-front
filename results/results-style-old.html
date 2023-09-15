@@ -1,0 +1,809 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+    :root {
+        --p-gray: #00000088;
+        --p-cian: #66CAA5;
+        --h-title: #BD92CE;
+
+        --border: #BD92CE;
+        --button: #BD92CE;
+        --input-bg: #DEC8E7;
+        --input-placeholder: #5E4967;
+
+        --dot-bg: #F1CD21;
+    }
+    
+    body {
+        width: 100%;
+        height: auto;
+    }
+    
+    h2 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 48px;
+        line-height: 134%;
+
+        color: var(--h-title);
+    }
+    
+    h3 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 132%;
+    }
+    
+    p, .p1 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 400;
+        font-size: 20px; /* На этой странице 20px вместо 18px */
+        line-height: 112%; /* На этой странице 112% вместо 21px */
+    }
+
+    .p1-strong {
+        font-family: 'Roboto';
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 112%;
+
+        color: var(--border);
+    }
+
+    .p2 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 112%;
+        color: #000000;
+    }
+
+    .p2-strong {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 112%;
+        color: var(--p-cian);
+    }
+
+    .p-gray {
+        color: var(--p-gray);
+    }
+
+    .p-cut {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+
+<style>
+    /* Логотип сверху слево */
+    #top-left-logo {
+        width: 128px;
+        
+        position: absolute;
+        top: 50px;
+        left: 100px;
+        
+    }
+    
+    #top-left-logo img {
+        width: 100%;
+    }
+</style>
+    
+<style>
+    article {
+        width: min(1440px, 100%); /* Ширина 1440px или 100% при сужении */
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+        
+        margin: 0 auto; /* По центру страницы */
+    }
+
+    section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 100px;
+
+        box-sizing: border-box;
+        padding: 110px 60px 70px 60px;
+    }
+
+
+    /* Центрированный текст */
+    .centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    /* Текст центрирован */
+    .centered-text {
+        text-align: center;
+    }
+
+
+    /* В верхнем регистре */
+    .upper {
+        text-transform: uppercase;
+    }
+
+    /* Вертикальный центр */
+    .ver-center {
+        margin: auto 0px;
+    }
+</style>
+
+<style>
+    /* Контейнер результатов */
+    .container {
+        width: 660px;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+
+        border-radius: 10px;
+        border: 1px solid var(--border);
+    }
+
+    /* Заголовок */
+    .title {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px 0px;
+
+        color: #BD92CE;
+        font-weight: 500;
+
+        border-bottom: 1px solid var(--border);
+    }
+</style>
+
+<style>
+    /* 43 Профессии */
+    .d-43p-row {
+        width: 100%;
+        height: 85px;
+        display: flex;
+
+        box-sizing: border-box;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .d-43p-row p {
+        font-size: 12px;
+        
+        box-sizing: border-box;
+        padding: 10px 4px 10px 4px;
+    }
+
+    /* border слево для второго и третьего текста в строке */
+    .d-43p-row p:not(:first-of-type) {
+        border-left: 1px solid var(--border);
+    }
+
+    .d-43p-row p:nth-of-type(1) {
+        width: 223px;
+    }
+
+    .d-43p-row p:nth-of-type(2) {
+        width: 144px;
+    }
+
+    .d-43p-row p:nth-of-type(3) {
+        width: 292px;
+    }
+
+    /* Первая строка с синими буквами */
+    .d-43p-row_first {
+        height: 60px;
+    }
+
+    .d-43p-row_first p {
+        color: #66CAA5;
+        font-weight: 500;
+    }
+
+
+    /* Последняя строка */
+    .d-43p-doublerow {
+        width: 100%;
+        display: flex;
+    }
+
+    .d-43p-doublerow p {
+        font-size: 12px;
+        
+        box-sizing: border-box;
+        padding: 10px 4px 10px 4px;
+    }
+
+    .d-43p-doublerow p:nth-of-type(1) {
+        width: 368px;
+        height: 100%;
+        border-right: 1px solid var(--border);
+    }
+
+    .d-43p-doublerow p:nth-of-type(2) {
+        width: 291px;
+    }
+</style>
+
+<style>
+    /* 10 Любимых дел (Детский / взрослый) */
+    /* Идеальная работа (Детский / взрослый) */
+
+    /* Первая строка с 2 инпутами */
+    .d-10ft-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        box-sizing: border-box;
+        padding: 30px 54px 62px 54px;
+    }
+
+    /* Вертикальный блок с инпутом и текстом */
+    .d-10ft-input-block {
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .d-10ft-input-block p {
+        font-size: 20px;
+    }
+
+    /* Название диагностики и дата */
+    .d-10ft-input-block input {
+        width: 100%;
+        height: 40px;
+        font-size: 20px;
+        text-align: center;
+
+        box-sizing: border-box;
+        padding: 9px;
+
+        border: 2px solid var(--border);
+        border-radius: 10px;
+
+        color: #808080;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+    }
+
+
+    /* Контент диагностики */
+    .d-10ft-content {
+        width: 100%;
+        height: 424px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 40px 53px;
+
+        box-sizing: border-box;
+        padding: 0px 54px 63px 54px;
+    }
+
+    .d-10ft-input-wrapper {
+        width: 250px;
+        height: 40px;
+        position: relative;
+    }
+
+    .d-10ft-input-wrapper input {
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+
+        box-sizing: border-box;
+        padding: 9px 9px 9px 40px;
+
+        border: 2px solid var(--border);
+        border-radius: 10px;
+
+        color: #000000;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+    }
+
+    .d-10ft-input-wrapper p {
+        position: absolute;
+        top: 9px;
+        left: 9px;
+
+        color: #000000;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+    }
+</style>
+
+<style>
+    /* Мои потребности (Детский / взрослый) */
+    .d-myn-row {
+        width: 100%;
+        height: auto;
+        display: flex;
+
+        box-sizing: border-box;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .d-myn-row p {
+        font-size: 12px;        
+        box-sizing: border-box;
+        padding: 10px 4px 10px 4px;
+    }
+
+    /* border слево для второго и третьего текста в строке */
+    .d-myn-row p:not(:first-of-type) {
+        border-left: 1px solid var(--border);
+    }
+
+    .d-myn-row p:nth-of-type(1) {
+        width: 180px;
+
+        text-align: center;
+    }
+
+    .d-myn-row p:nth-of-type(2) {
+        width: 80px;
+    }
+
+    .d-myn-row p:nth-of-type(3) {
+        width: 400px;
+    }
+
+    /* Первая строка с синими буквами */
+    .d-myn-row_first {
+        height: 60px;
+    }
+
+    .d-myn-row_first p {
+        color: #66CAA5;
+        font-weight: 500;
+    }
+
+
+    /* Последняя строка */
+    .d-myn-row_last {
+        border-bottom: none;
+    }
+</style>
+
+<style>
+    /* Антирейтинг профессий (Детский / взрослый) */
+
+    /* Первая строка с 2 инпутами */
+    .d-aop-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        box-sizing: border-box;
+        padding: 30px 54px 22px 54px;
+    }
+
+    /* Вертикальный блок с инпутом и текстом */
+    .d-aop-input-block {
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .d-aop-input-block p {
+        font-size: 20px;
+    }
+
+    /* Название диагностики и дата */
+    .d-aop-input-block input {
+        width: 100%;
+        height: 40px;
+        font-size: 20px;
+        text-align: center;
+
+        box-sizing: border-box;
+        padding: 9px;
+
+        border: 2px solid var(--border);
+        border-radius: 10px;
+
+        color: #808080;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+    }
+
+
+    /* Контент диагностики */
+    .d-aop-content {
+        width: 100%;
+        height: 465px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 11px 53px;
+
+        box-sizing: border-box;
+        padding: 0px 54px 20px 54px;
+    }
+
+    .d-aop-input-wrapper {
+        width: 250px;
+        height: 80px;
+        position: relative;
+    }
+
+    .d-aop-input-wrapper textarea {
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+
+        box-sizing: border-box;
+        padding: 10px 0px 0px 40px;
+
+        border: 2px solid var(--border);
+        border-radius: 10px;
+
+        color: #000000;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+
+        resize: none;
+    }
+
+    /* Скролл */
+    .d-aop-input-wrapper textarea::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    /* Подложка скролла в цвет фона */
+    .d-aop-input-wrapper textarea::-webkit-scrollbar-track {
+        margin: 4px 0px;
+        border-radius: 4px;
+        background-color: #00000000;
+    }
+
+    /* Скрол цвета основного блока */
+    .d-aop-input-wrapper textarea::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: var(--input-bg);
+    }
+
+    .d-aop-input-wrapper p {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+
+        color: #000000;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+    }
+</style>
+
+<style>
+    /* Интервью (Детский / взрослый) */
+
+    /* Первая строка с 2 инпутами */
+    .d-inter-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        box-sizing: border-box;
+        padding: 30px 54px 42px 54px;
+    }
+
+    /* Вертикальный блок с инпутом и текстом */
+    .d-inter-input-block {
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .d-inter-input-block p {
+        font-size: 20px;
+    }
+
+    /* Название диагностики и дата */
+    .d-inter-input-block input {
+        width: 100%;
+        height: 40px;
+        font-size: 20px;
+        text-align: center;
+
+        box-sizing: border-box;
+        padding: 9px;
+
+        border: 2px solid var(--border);
+        border-radius: 10px;
+
+        color: #808080;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+    }
+
+
+    /* Контент диагностики */
+    .d-inter-content {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 21px;
+
+        box-sizing: border-box;
+        padding: 0px 54px 40px 54px;
+    }
+
+    .d-inter-input-wrapper {
+        width: 100%;
+        height: 120px;
+        position: relative;
+    }
+
+    .d-inter-input-wrapper textarea {
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+
+        box-sizing: border-box;
+        padding: 20px 0px 0px 44px;
+
+        border: 2px solid var(--border);
+        border-radius: 10px;
+
+        color: #000000;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+
+        resize: none;
+    }
+
+    /* Скролл */
+    .d-inter-input-wrapper textarea::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    /* Подложка скролла в цвет фона */
+    .d-inter-input-wrapper textarea::-webkit-scrollbar-track {
+        margin: 4px 0px;
+        border-radius: 4px;
+        background-color: #00000000;
+    }
+
+    /* Скрол цвета основного блока */
+    .d-inter-input-wrapper textarea::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: var(--input-bg);
+    }
+
+    .d-inter-input-wrapper p {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+
+        color: #000000;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+    }
+</style>
+
+<style>
+    /* 8 Кадров (Детский / взрослый) */
+
+    /* Первая строка с 2 инпутами */
+    .d-8f-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        box-sizing: border-box;
+        padding: 30px 54px 22px 54px;
+    }
+
+    /* Вертикальный блок с инпутом и текстом */
+    .d-8f-input-block {
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .d-8f-input-block p {
+        font-size: 20px;
+    }
+
+    /* Название диагностики и дата */
+    .d-8f-input-block input {
+        width: 100%;
+        height: 40px;
+        font-size: 20px;
+        text-align: center;
+
+        box-sizing: border-box;
+        padding: 9px;
+
+        border: 2px solid var(--border);
+        border-radius: 10px;
+
+        color: #808080;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+    }
+
+
+    /* Контент диагностики */
+    .d-8f-content {
+        width: 100%;
+        height: 374px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 11px 53px;
+
+        box-sizing: border-box;
+        padding: 0px 54px 20px 54px;
+    }
+
+    .d-8f-input-wrapper {
+        width: 250px;
+        height: 80px;
+        position: relative;
+    }
+
+    .d-8f-input-wrapper textarea {
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+
+        box-sizing: border-box;
+        padding: 10px 0px 0px 40px;
+
+        border: 2px solid var(--border);
+        border-radius: 10px;
+
+        color: #000000;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+
+        resize: none;
+    }
+
+    /* Скролл */
+    .d-8f-input-wrapper textarea::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    /* Подложка скролла в цвет фона */
+    .d-8f-input-wrapper textarea::-webkit-scrollbar-track {
+        margin: 4px 0px;
+        border-radius: 4px;
+        background-color: #00000000;
+    }
+
+    /* Скрол цвета основного блока */
+    .d-8f-input-wrapper textarea::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: var(--input-bg);
+    }
+
+    .d-8f-input-wrapper p {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+
+        color: #000000;
+        font-family: 'Roboto', Sans-Serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 112%;
+    }
+</style>
+
+<style>
+    /* Исследование ценностей */
+    .d-exval-row {
+        width: 100%;
+        height: auto;
+        display: flex;
+
+        box-sizing: border-box;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .d-exval-row p {
+        font-size: 12px;
+
+        box-sizing: border-box;
+        padding: 10px 4px 10px 4px;
+    }
+
+    /* border слево для второго и третьего текста в строке */
+    .d-exval-row p:not(:first-of-type) {
+        border-left: 1px solid var(--border);
+    }
+
+    .d-exval-row p:nth-of-type(1) {
+        width: 180px;
+
+        text-align: center;
+    }
+
+    .d-exval-row p:nth-of-type(2) {
+        width: 80px;
+    }
+
+    .d-exval-row p:nth-of-type(3) {
+        width: 400px;
+    }
+
+    /* Первая строка с синими буквами */
+    .d-exval-row_first {
+        height: 60px;
+    }
+
+    .d-exval-row_first p {
+        color: #66CAA5;
+        font-weight: 500;
+    }
+
+
+    /* Последняя строка */
+    .d-exval-row_last {
+        border-bottom: none;
+    }
+</style>

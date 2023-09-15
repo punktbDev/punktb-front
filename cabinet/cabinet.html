@@ -1,0 +1,1940 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+    :root {
+        --p-gray: #00000088;
+        --p-cian: #66CAA5;
+        --h-title: #BD92CE;
+
+        --border: #BD92CE;
+        --button: #BD92CE;
+        --input-bg: #DEC8E7;
+        --input-placeholder: #5E4967;
+
+        --dot-bg: #F1CD21;
+    }
+    
+    body {
+        width: 100%;
+        height: auto;
+    }
+    
+    h2 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 48px;
+        line-height: 134%;
+
+        color: var(--h-title);
+    }
+    
+    h3 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 132%;
+    }
+    
+    p, .p1 {
+        font-family: 'Roboto', Sans-Serif;
+        font-weight: 400;
+        font-size: 20px; /* На этой странице 20px вместо 18px */
+        line-height: 112%; /* На этой странице 112% вместо 21px */
+    }
+
+    .p1-strong {
+        font-family: 'Roboto';
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 112%;
+
+        color: var(--p-cian);
+    }
+
+    .p-gray {
+        color: var(--p-gray);
+    }
+
+    .p-cut {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+
+    /* Стиль для ошибки инпута */
+    input.error {
+        animation: inputError 2s ease-in;
+    }
+
+    /* Анимацция ошибки */
+    @keyframes inputError {
+        0% {
+            border: 1px solid var(--border);
+        }
+
+        2% {
+            border: 1px solid #F40B0B;
+        }
+
+        100% {
+            border: 1px solid var(--border);
+        }
+    }
+</style>
+
+<style>
+    /* Логотип сверху слево */
+    #top-left-logo {
+        width: 128px;
+        
+        position: absolute;
+        top: 50px;
+        left: 100px;
+        
+    }
+    
+    #top-left-logo img {
+        width: 100%;
+    }
+</style>
+    
+<style>
+    article {
+        width: min(1440px, 100%); /* Ширина 1440px или 100% при сужении */
+        height: 800px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+        
+        margin: 0 auto; /* По центру страницы */
+    }
+    
+    
+    aside {
+        width: 40%;
+    }
+
+    aside nav {
+        width: 100%;
+        box-sizing: border-box;
+        padding-left: 100px;
+
+        margin-top: 145px;
+    }
+
+
+    nav li {
+        width: 100%;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        margin-top: 36px;
+    }
+
+    .nav-button {
+        width: 300px;
+        height: 40px;
+        padding: 0 !important;
+        margin: 0;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 40px;
+        
+
+        transition: .15s all;
+        cursor: pointer;
+    }
+
+    .nav-button:hover, .nav-button:active {
+        color: var(--p-cian);
+    }
+
+    .nav-button:not(:first-child) {
+        margin-top: 36px;
+    }
+
+    .nav-button:last-child {
+        height: 32px;
+    }
+
+    .nav-button.active {
+        color: var(--p-cian);
+    }
+
+
+    /* Текст после основного текста кнопки (Кол-во заявок) */
+    .nav-button p span {
+        color: #F1CD21;
+        margin-left: 22px;
+    }
+
+    .nav-button img {
+        width: 40px;
+        height: 40px;
+    }
+</style>
+
+<style>
+    section {
+        width: 60%;
+        box-sizing: border-box;
+        padding-right: 100px;
+    }
+
+    /* Профиль сверху справо */
+    .profile {
+        height: 60px;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 22px;
+
+        margin: 32px 0 33px auto; /* К правому краю + оступы */
+    }
+
+
+    /* Контейнер вкладки */
+    .container {
+        width: 660px;
+        height: 636px;
+        box-sizing: border-box;
+
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        
+        margin-left: auto; /* К правому краю */
+    }
+
+
+    /* Заголовок формы */
+    .form-title {
+        width: 100%;
+        height: 75px;
+
+        box-sizing: border-box; /* Бордер внутри */
+        border-bottom: 1px solid var(--border);
+    }
+
+    /* Для множественных заголовков */
+    .form-title:not(:first-child) {
+        border-top: 1px solid var(--border); /* Бордер сверху */
+    }
+
+    .form-title p {
+        width: 470px;
+        text-align: center;
+    }
+
+    /* Центрированый текст внутрки заголовков во вкладке "Мой профиль"  */
+    #container-profile .form-title,
+    #container-open-card .form-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: relative;
+    }
+
+    /* В других вкладках поле поиска  */
+    #container-clients .form-title,
+    #container-diagnostics .form-title,
+    #container-archive .form-title {
+        display: flex;
+        align-items: center;
+
+        position: relative;
+    }
+
+    /* Во вкладке "Мой профиль" текст в заголовке капсом */
+    .form-title .p1-strong {
+        text-transform: uppercase; 
+    }
+
+    /* В открытой карточке кнопка назад */
+    #container-open-card-back, .container-back {
+        width: 20px;
+        height: 20px;
+        padding: 12px 16px;
+        position: absolute;
+
+        left: calc(40px - 16px); /* Минус отступ от паддинга */
+        top: calc(24px - 12px); /* Минус отступ от паддинга */
+        opacity: .5;
+        transition: .15s all;
+
+        cursor: pointer;
+    }
+
+    /* В открытой карточке кнопка в архив */
+    #container-open-card-archive {
+        width: 20px;
+        height: 20px;
+        padding: 12px 16px;
+        position: absolute;
+
+        right: calc(40px - 16px); /* Минус отступ от паддинга */
+        top: calc(24px - 12px); /* Минус отступ от паддинга */
+        opacity: .5;
+        transition: .15s all;
+
+        cursor: pointer;
+    }
+
+
+    /* Мобильная кнопка возвращение в навигацию */
+    .container-back {
+        display: none;
+    }
+
+    @media (hover: hover) {
+        #container-open-card-back:hover,
+        #container-open-card-archive:hover,
+        .container-back:hover {
+            opacity: 1;
+        }
+    }
+
+    @media (hover: none) {
+        #container-open-card-back:hover,
+        #container-open-card-archive:hover,
+        .container-back:hover {
+            opacity: 1;
+        }
+    }
+
+
+    /* Форма профиля и пароля */
+    #container-profile .content, #container-open-card .content {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 18px 0 18px 54px;
+
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+        gap: 17px 52px;
+    }
+
+    .input-block {
+        width: 250px;
+        height: 66px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .input-block input {
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        padding: 0 12px;
+
+        border: 1px solid var(--border);
+        border-radius: 10px;
+
+        margin-top: 4px; /* Отступ от текста */
+    }
+
+
+    /* Поле с паролем */
+    .password-input {
+        width: 250px;
+        height: 40px;
+        box-sizing: border-box;
+        position: relative;
+
+        border-radius: 10px;
+
+        margin-top: 4px; /* Отступ от текста */
+    }
+
+    .password-input input {
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        margin: 0px;
+
+        border: 1px solid var(--border);
+        border-radius: 10px;
+
+        padding-left: 12px;
+        padding-right: 52px; /* Оступ от картинки (20px + 20px + 12px) */
+    }
+
+    /* Кнопка просмотра пароля */
+    .password-input img {
+        width: 20px;
+        height: 20px;
+
+        position: absolute;
+        right: 20px;
+        top: 10px;
+
+        opacity: .5;
+        cursor: pointer;
+        transition: .15s all;
+    }
+
+    @media (hover: hover) {
+        .password-input img:hover {
+            opacity: 1;
+        }
+    }
+
+    @media (hover: none) {
+        .password-input img {
+            opacity: 1;
+        }
+    }
+
+
+    /* Кнопка сохранить профиль и пароль */
+    .button-wrapper {
+        flex-basis: 100%; /* Принудительный перенос строки */
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        width: 300px;
+        height: 40px;
+        box-sizing: border-box;
+        
+        background: var(--border);
+        border-radius: 10px;
+        border: none;
+        outline: none;       
+        
+        transition: .15s all;
+        cursor: pointer;
+        color: #000000 !important;
+    }
+
+    @media (hover: hover) {
+        button:hover {
+            background: #000000;
+            color: #FFFFFF !important;
+        }
+    }
+    
+    button:disabled {
+        background: #d1aedf;
+        color: #313131 !important;
+        cursor: not-allowed;
+    }
+
+
+    /* Поиск */
+    .search-wrapper {
+        width: 300px;
+        height: 40px;
+        box-sizing: border-box;
+        position: relative;
+
+        border-radius: 10px;
+
+        margin-left: 54px;
+    }
+
+    .search-wrapper input {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding-left: 48px; /* Оступ от картинки */
+        padding-right: 12px;
+
+        outline: none;
+        border: none;
+        border-radius: 10px;
+        background: var(--input-bg);
+    }
+
+    .search-wrapper input::placeholder {
+        color: var(--input-placeholder);
+    }
+
+    /* Кнопка в поиске */
+    .search-wrapper img {
+        width: 20px;
+        height: 20px;
+
+        position: absolute;
+        left: 20px;
+        top: 10px;
+
+        opacity: .5;
+    }
+
+    /* Фиксированная высота контента для скрола */
+    #container-clients .content,
+    #container-archive .content,
+    #container-diagnostics .content {
+        width: 100%;
+        height: 560px;
+        overflow: overlay;
+    }
+
+    /* Скролл */
+    #container-clients .content::-webkit-scrollbar,
+    #container-archive .content::-webkit-scrollbar,
+    #container-diagnostics .content::-webkit-scrollbar,
+    .results-container::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    /* Подложка скролла в цвет фона */
+    #container-clients .content::-webkit-scrollbar-track,
+    #container-archive .content::-webkit-scrollbar-track,
+    #container-diagnostics .content::-webkit-scrollbar-track,
+    .results-container::-webkit-scrollbar-track {
+        border-radius: 4px;
+        background-color: #00000000;
+    }
+
+    /* Скрол цвета основного блока */
+    #container-clients .content::-webkit-scrollbar-thumb,
+    #container-archive .content::-webkit-scrollbar-thumb,
+    #container-diagnostics .content::-webkit-scrollbar-thumb,
+    .results-container::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: var(--input-bg);
+    }
+
+
+    /* Карточка */
+    .card {
+        width: 100%;
+        height: 80px;
+        box-sizing: border-box;
+        padding: 14px 62px 14px 70px;
+
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+
+        cursor: pointer;
+    }
+
+    .card-left {
+        display: flex;
+        height: 100%;
+    }
+
+    .card-left__dot-wrapper {
+        width: 8px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .card-left__dot {
+        width: 8px;
+        height: 8px;
+        
+        border-radius: 8px;
+        background: var(--dot-bg);
+    }
+
+    .card-left__content {
+        width: 375px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 16px;
+    }
+
+    .card-right__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-right__content p {
+        text-align: center;
+    }
+
+
+    /* Контейнер со всеми результатами */
+    .results-container {
+        width: 100%;
+        height: 384px;
+        overflow: overlay;
+    }
+
+    /* Результат */
+    .result {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 22px 0;
+
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        gap: 17px 52px;
+
+        border-bottom: 1px solid var(--border);
+    }
+
+    /* Инпуты в открытой карточке */
+    .input-open-card {
+        text-align: center;
+        color: var(--p-gray);
+    }
+
+    /* Кнопка в открытой карточке */
+    .input-block button {
+        width: 100%;
+        height: 40px;
+    }
+
+    .result .p1-strong {
+        color: #000000;
+    }
+
+
+    /* Диагностики */
+    .diagnostic {
+        width: 100%;
+        min-height: 80px;
+        box-sizing: border-box;
+
+        display: flex;
+
+        border-bottom: 1px solid var(--border);
+    }
+
+    .diagnostic .diagnostic-title {
+        width: 360px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 12px;
+    }
+
+    /* Бордер слево от параграфа с ссылкой */
+    .diagnostic-link {
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 12px;
+
+        border-left: 1px solid var(--border);
+
+        position: relative;
+    }
+
+    .diagnostic-link p {
+        font-size: 18px;
+        word-break: break-word;
+    }
+
+    .diagnostic-title p {
+        word-break: break-word;
+        text-align: center;
+    }
+
+    /* @media (hover: hover) {
+        .diagnostic-link p:hover {
+            text-decoration: underline;
+        }
+    }
+
+    @media (hover: none) {
+        .diagnostic-link p {
+            text-decoration: underline;
+        }
+    } */
+</style>
+
+<style>
+    /* Кнопка фильтра */
+    #filter-clients, #filter-archive {
+        width: 25px;
+        height: 25px;
+        padding: 12px 16px;
+        margin-left: calc(24px - 16px);
+
+        opacity: .5;
+        transition: .15s all;
+
+        cursor: pointer;
+    }
+
+    @media (hover: hover) {
+        #filter-clients:hover, #filter-archive:hover {
+            opacity: 1;
+        }
+    }
+
+    @media (hover: none) {
+        #filter-clients, #filter-archive {
+            opacity: 1;
+        }
+    }
+
+
+    /* Обвертка модального окна */
+    #filter-wrapper {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #d9d9d988;
+
+        display: none;
+        justify-content: center;
+        align-items: center;
+
+        z-index: 5; /* Выше навигации */
+    }
+
+    .filter {
+        width: 342px;
+        /* height: 340px; */
+
+        background: #FFFFFF;
+        border-radius: 10px;
+    }
+
+    .filter-title {
+        padding: 24px 30px 0 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .filter-title .p1-strong {
+        color: #000000;
+    }
+
+    #filter-reset {
+        color: var(--border);
+        cursor: pointer;
+        opacity: .75;
+        transition: .15s all;
+    }
+
+    @media (hover: hover) {
+        #filter-reset:hover {
+            opacity: 1;
+        }
+    }
+
+    @media (hover: none) {
+        #filter-reset {
+            opacity: 1;
+        }
+    }
+    
+
+    .filter-content {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 24px 51px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .filter-input {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .filter-input label {
+        margin-left: 16px;
+    }
+
+    input[type="radio"] {
+        width: 16px;
+        height: 16px;
+        position: relative;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+
+    input[type="radio"]::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        box-sizing: border-box;
+        background-color: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+    }
+
+    input[type="radio"]:checked::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        box-sizing: border-box;
+        background-color: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 50%;
+    }
+
+    .filter-date__inputs {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .filter-input-date {
+        width: 100%;
+        height: 36px;
+        position: relative;
+    }
+
+    .filter-input-date p {
+        position: absolute;
+        top: 7px;
+        left: 16px;
+        color: var(--p-gray);
+    }
+
+    #filter-date-from, #filter-date-to {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 7px 12px 7px 48px;
+
+        border: 1px solid #BD92CE;
+        border-radius: 5px;
+    }
+
+    #filter-submit {
+        width: 100%;
+        height: 36px;
+    }
+
+
+
+    /* Бургер навигации */
+    #nav-burger {
+        display: none;
+    }
+
+
+    /* Открытие всех результатов */
+    #open-all-results {
+        cursor: pointer;
+        opacity: .75;
+        transition: .15s all;
+
+        margin-left: 8px;
+    }
+
+    @media (hover: hover) {
+        #open-all-results:hover {
+            opacity: 1;
+        }
+    }
+
+    @media (hover: none) {
+        #open-all-results {
+            opacity: 1;
+        }
+    }
+</style>
+
+<article>
+    <div id="top-left-logo">
+        <img src="https://static.tildacdn.com/tild6630-3237-4638-a534-313664333931/___.svg" alt="logo">
+    </div>
+    
+    <aside class="show">
+        <nav>
+            <h2>Личный кабинет</h2>
+            <li>
+                <ul class="nav-button active" id="button-profile">
+                    <img src="https://sun9-59.userapi.com/impg/wqeE0urBpsTBq0Me52yyTVY9HrIuszyWSBcC9g/JfPUfVO0uTc.jpg?size=40x40&quality=96&sign=7118e4357a1c62fbc95e442404d3b6e3&type=album" alt="icon">
+                    <p>Мой профиль</p>
+                </ul>
+
+                <ul class="nav-button" id="button-clients">
+                    <img src="https://sun9-18.userapi.com/impg/1r9WLUtoQXqKa68W-wQgX5CE7aBhMwdgcHWXJA/y0TN0gwaAcY.jpg?size=40x40&quality=96&sign=71f7b3a984b39866688f941d3caffb7f&type=album" alt="icon">
+                    <p>Клиенты <span id="clients-count"></span></p>
+                </ul>
+
+                <ul class="nav-button" id="button-diagnostics">
+                    <img src="https://sun9-69.userapi.com/impg/1HeX6bKsvGYfBdlaHTnO55bagoCykLor_AQqzg/cx8IsMpi4BA.jpg?size=40x40&quality=96&sign=96108686bbd8371a82739c77de83fa05&type=album" alt="icon">
+                    <p>Диагностики</p>
+                </ul>
+
+                <ul class="nav-button" id="button-archive">
+                    <img src="https://sun9-38.userapi.com/impg/31fXj_bw27r80XONzOal2PdJNVc_VZHGp41QaA/8ZKIlBzeYWI.jpg?size=40x40&quality=96&sign=38e9aaafa5af233fc9d7af5697475e22&type=album" alt="icon">
+                    <p>Архив клиентов</p>
+                </ul>
+
+                <ul class="nav-button" id="profile-exit">
+                    <h3>Выход</h3>
+                </ul>
+            </li>
+        </nav>
+    </aside>
+    <section>
+        <!-- Бурег навигации -->
+        <button id="nav-burger">
+            <img src="https://sun9-24.userapi.com/impg/pyBLBVZoxTbXm7uCYmaozA9PQvVUb4GayeB9EA/aOYuL2hWMaU.jpg?size=18x13&quality=96&sign=d09497b1dd17836f8a6b7689eacf91f5&type=album" alt="burger">
+        </button>
+
+        <div class="profile">
+            <p id="user-name"></p>
+        </div>
+        
+        <!-- Мой профиль -->
+        <div class="container" id="container-profile">
+            <div class="form-title">
+                <img class="container-back" src="https://sun9-64.userapi.com/impg/rUA7pf4L-OYqslHxsRdFexaqvJHatedm7gem4w/9cMlyT7_OCI.jpg?size=20x20&quality=96&sign=b0f6cc6229f18413c69e04a77fa729cc&type=album" alt="back">
+                <p class="p1-strong">Контактная информация</p>
+            </div>
+
+            <form class="content" id="profile-form">
+                <div class="input-block">
+                    <p>Имя</p>
+                    <input class="p1" type="text" id="profile-name" name="profile-name" minlength="1" maxlength="100" required>
+                </div>
+
+                <div class="input-block">
+                    <p>Фамилия</p>
+                    <input class="p1" type="text" id="profile-surname" name="profile-surname" minlength="1" maxlength="100" required>
+                </div>
+
+                <div class="input-block">
+                    <p>Телефон</p>
+                    <input class="p1" type="phone" id="profile-phone" name="profile-phone" minlength="1" maxlength="100" required>
+                </div>
+
+                <div class="input-block">
+                    <p>Email</p>
+                    <input class="p1" type="email" id="profile-email" name="profile-email" minlength="1" maxlength="100" required>
+                </div>
+
+                <div class="button-wrapper">
+                    <button class="p1" id="profile-save" type="submit" disabled>Сохранить</button>
+                </div>
+            </form>
+
+            <div class="form-title">
+                <p class="p1-strong">Обновить пароль</p>
+            </div>
+
+            <form class="content" id="password-form">
+                <div class="input-block">
+                    <p>Текущий пароль</p>
+                    <div class="password-input">
+                        <input class="p1" type="password" id="password-old" name="password-old" minlength="8" maxlength="64" required>
+                        <img id="password-old-show" src="https://sun9-22.userapi.com/impg/dxnTH0YfbX30oSu95YgdwUBfTKQTNre2pR4spQ/RX2l5PyoxX4.jpg?size=20x20&quality=96&sign=97393bbce30213c930243aa178f6fbec&type=album" alt="show-password">
+                    </div>
+                </div>
+
+                <div class="input-block">
+                    <p>Новый пароль</p>
+                    <div class="password-input">
+                        <input class="p1" type="password" id="password-new" name="password-new" minlength="8" maxlength="64" required>
+                        <img id="password-new-show" src="https://sun9-22.userapi.com/impg/dxnTH0YfbX30oSu95YgdwUBfTKQTNre2pR4spQ/RX2l5PyoxX4.jpg?size=20x20&quality=96&sign=97393bbce30213c930243aa178f6fbec&type=album" alt="show-password">
+                    </div>
+                </div>
+
+                <div class="input-block">
+                    <p>Подтвердить пароль</p>
+                    <div class="password-input">
+                    <input class="p1" type="password" id="password-new-again" name="password-new-again" minlength="8" maxlength="64" required>
+                        <img id="password-new-again-show" src="https://sun9-22.userapi.com/impg/dxnTH0YfbX30oSu95YgdwUBfTKQTNre2pR4spQ/RX2l5PyoxX4.jpg?size=20x20&quality=96&sign=97393bbce30213c930243aa178f6fbec&type=album" alt="show-password">
+                    </div>
+                </div>
+
+                <div class="button-wrapper">
+                    <button class="p1" id="password-save" type="submit" disabled>Сохранить</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Клиенты -->
+        <div class="container hidden" id="container-clients">
+            <div class="form-title">
+                <img class="container-back" src="https://sun9-64.userapi.com/impg/rUA7pf4L-OYqslHxsRdFexaqvJHatedm7gem4w/9cMlyT7_OCI.jpg?size=20x20&quality=96&sign=b0f6cc6229f18413c69e04a77fa729cc&type=album" alt="back">
+                <div class="search-wrapper">
+                    <img src="https://sun9-37.userapi.com/impg/T8eXU9hjGKbidLoRfYcwhemoFYaUZqZhzReyOw/VDMiXpFuDTw.jpg?size=132x132&quality=96&sign=f14d29f2f37a347cc7152825a1841fa6&type=album" alt="search">
+                    <input type="text" class="p1" id="search-clients" placeholder="Поиск">
+                </div>
+
+                <img id="filter-clients" src="https://sun9-75.userapi.com/impg/u9cGeQ6ew7_9I_QhM5rgIdo_ut6tpqR8-tZXWA/gisscmRmz3I.jpg?size=25x25&quality=96&sign=d02409b63c2dc95d043f603c75a4b9e8&type=album" alt="filter">
+            </div>
+
+            <div class="content">
+                <!-- <div class="card">
+                    <div class="card-left">
+                        <div class="card-left__dot-wrapper">
+                            <div class="card-left__dot"></div>
+                        </div>
+                        <div class="card-left__content">
+                            <p class="p-gray p-cut">12345678</p>
+                            <p class="p-cut">Маша Иванова</p>
+                        </div>
+                    </div>
+                    <div class="card-right__content">
+                        <p class="p-gray">31.05.2023</p>
+                        <p class="p-gray">12:45</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        
+        <div class="container hidden" id="container-open-card">
+            <div class="form-title">
+                <img id="container-open-card-back" src="https://sun9-64.userapi.com/impg/rUA7pf4L-OYqslHxsRdFexaqvJHatedm7gem4w/9cMlyT7_OCI.jpg?size=20x20&quality=96&sign=b0f6cc6229f18413c69e04a77fa729cc&type=album" alt="back">
+                <p class="p1-strong" id="open-card-name"></p>
+                <img title="В архив" id="container-open-card-archive" src="https://sun9-40.userapi.com/impg/5COzMkBapQI7UoIlkAKDX1Ne3d8G6BeZtEAAiw/D8mR4ZRs61c.jpg?size=20x20&quality=96&sign=ac2a200bf0a8933a0bddc7bada7633e3&type=album" alt="to-archive">
+            </div>
+
+            <div class="content">
+                <div class="input-block">
+                    <p>Телефон</p>
+                    <input class="p1 input-open-card" id="open-card-phone" readonly>
+                </div>
+                
+                <div class="input-block">
+                    <p>Email</p>
+                    <input class="p1 input-open-card" id="open-card-email" readonly>
+                </div>
+            </div>
+
+            <div class="form-title">
+                <p class="p1-strong">Результаты теста
+                    <img title="Открыть все результаты" id="open-all-results" src="https://sun9-4.userapi.com/impg/vjUmcw2qOtSGVxlbWp8tf2kBPw3gSUq5AdwnRw/JI4GcZmEMjg.jpg?size=15x15&quality=96&sign=d5bbb57b1f289a6d242b537caf0bed5b&type=album" alt="open-all">
+                </p>
+            </div>
+
+            <div class="results-container">
+                <!-- <div class="result">
+                    <div class="input-block">
+                        <p class="p1-strong">Название диагностики</p>
+                        <input class="p1 input-open-card" readonly>
+                    </div>
+                    <div class="input-block">
+                        <p>Дата прохождения</p>
+                        <input class="p1 input-open-card" readonly>
+                    </div>
+                    <div class="input-block">
+                        <button class="p1">Узнать результаты</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Диагностики -->
+        <div class="container hidden" id="container-diagnostics">
+            <div class="form-title">
+                <img class="container-back" src="https://sun9-64.userapi.com/impg/rUA7pf4L-OYqslHxsRdFexaqvJHatedm7gem4w/9cMlyT7_OCI.jpg?size=20x20&quality=96&sign=b0f6cc6229f18413c69e04a77fa729cc&type=album" alt="back">
+                <div class="search-wrapper">
+                    <img src="https://sun9-37.userapi.com/impg/T8eXU9hjGKbidLoRfYcwhemoFYaUZqZhzReyOw/VDMiXpFuDTw.jpg?size=132x132&quality=96&sign=f14d29f2f37a347cc7152825a1841fa6&type=album" alt="search">
+                    <input type="text" class="p1" id="search-diagnostics" placeholder="Поиск">
+                </div>
+            </div>
+
+            <!-- Список диагностик -->
+            <div class="content">
+                <!-- <div class="diagnostic">
+                    <div class="diagnostic-title">
+                        <p>43 Профессии</p>
+                    </div>
+                    <div class="diagnostic-link">
+                        <p class="p-gray js-diagnostic">https://planb123.tilda.ws/43-professions?manager-id=</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Архив -->
+        <div class="container hidden" id="container-archive">
+            <div class="form-title">
+                <img class="container-back" src="https://sun9-64.userapi.com/impg/rUA7pf4L-OYqslHxsRdFexaqvJHatedm7gem4w/9cMlyT7_OCI.jpg?size=20x20&quality=96&sign=b0f6cc6229f18413c69e04a77fa729cc&type=album" alt="back">
+                <div class="search-wrapper">
+                    <img src="https://sun9-37.userapi.com/impg/T8eXU9hjGKbidLoRfYcwhemoFYaUZqZhzReyOw/VDMiXpFuDTw.jpg?size=132x132&quality=96&sign=f14d29f2f37a347cc7152825a1841fa6&type=album" alt="search">
+                    <input type="text" class="p1" id="search-archive" placeholder="Поиск">
+                </div>
+
+                <img id="filter-archive" src="https://sun9-75.userapi.com/impg/u9cGeQ6ew7_9I_QhM5rgIdo_ut6tpqR8-tZXWA/gisscmRmz3I.jpg?size=25x25&quality=96&sign=d02409b63c2dc95d043f603c75a4b9e8&type=album" alt="filter">
+            </div>
+
+            <div class="content">
+                <!-- <div class="card">
+                    <div class="card-left">
+                        <div class="card-left__dot-wrapper">
+                            <div class="card-left__dot hidden"></div>
+                        </div>
+                        <div class="card-left__content">
+                            <p class="p-gray p-cut">12345678</p>
+                            <p class="p-cut">Маша Иванова</p>
+                        </div>
+                    </div>
+                    <div class="card-right__content">
+                        <p class="p-gray">31.05.2023</p>
+                        <p class="p-gray">12:45</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Модальное окно фильтра -->
+    <div id="filter-wrapper">
+        <div class="filter">
+            <div class="filter-title">
+                <p class="p1-strong">Сортировка</p>
+                <p id="filter-reset">Сбросить</p>
+            </div>
+            <div class="filter-content">
+                <div class="filter-input">
+                    <input type="radio" id="filter-name" name="filter-type" value="name">
+                    <label for="filter-name" class="p1">По алфавиту</label>
+                </div>
+
+                <div class="filter-input">
+                    <input type="radio" id="filter-date" name="filter-type" value="date" checked>
+                    <label for="filter-date" class="p1">По дате</label>
+                </div>
+
+                <div class="filter-input-date">
+                    <input type="date" class="p1" id="filter-date-from" placeholder="От">
+                    <p>От</p>
+                </div>
+                <div class="filter-input-date">
+                    <input type="date" class="p1" id="filter-date-to" placeholder="До">
+                    <p>До</p>
+                </div>
+                
+                <button class="p1" id="filter-submit">Применить</button>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    // Пометить инпут ошибкой
+    function inputError(selector) {
+        // Если у инпута нету класса ошибки - добавляем и через 2 секунды удаляем
+        if (!$(selector).hasClass("error")) {
+            $(selector).addClass("error")
+            setTimeout(() => {$(selector).removeClass("error")}, 2000)
+        }
+    }
+
+    // Выход из профиля
+    $("#profile-exit").on("click tap", () => {
+        localStorage.removeItem("userData")
+        location.href = "../login"
+    })
+
+
+    // Кнпока Мой профиль
+    $("#button-profile").on("click tap", () => {
+        $(".nav-button").removeClass("active") // Снимаем эффект активной кнопки со всех
+        $("#button-profile").addClass("active") // И ставим только на профиль
+
+        $(".container").addClass("hidden") // Отключаем все контейнеры
+        $("#container-profile").removeClass("hidden") // И включаем только профиль
+    })
+
+    // Кнпока Клиенты
+    $("#button-clients").on("click tap", () => {
+        $(".nav-button").removeClass("active")
+        $("#button-clients").addClass("active")
+
+        $(".container").addClass("hidden")
+        $("#container-clients").removeClass("hidden")
+    })
+
+    // Кнпока Диагностики
+    $("#button-diagnostics").on("click tap", () => {
+        $(".nav-button").removeClass("active")
+        $("#button-diagnostics").addClass("active")
+
+        $(".container").addClass("hidden")
+        $("#container-diagnostics").removeClass("hidden")
+    })
+
+    // Кнпока Архив клиентов
+    $("#button-archive").on("click tap", () => {
+        $(".nav-button").removeClass("active")
+        $("#button-archive").addClass("active")
+
+        $(".container").addClass("hidden")
+        $("#container-archive").removeClass("hidden")
+    })
+
+    
+    // Просмотр пароля у поля старый пароль
+    $("#password-old-show").on("click tap", () => {
+        // По нажатию проверка, если инпут внутри с типом "Пароль", то меняется картинка и тип на "Текст"
+        if ($("#password-old").attr("type") === "password") {
+            $("#password-old-show").attr("src", "https://sun9-9.userapi.com/impg/QUqWeT558rMWZb9qXEnFINCBw9GeXUP7kfOABA/ffmOtqJTi_Y.jpg?size=20x20&quality=96&sign=e04699c99774ca3b38a39f486aa17b1a&type=album")
+            $("#password-old").attr("type", "text")
+            return
+        }
+
+        // Если тип "Текст", то возвращаем пароль и иконку открытого глаза
+        $("#password-old-show").attr("src", "https://sun9-22.userapi.com/impg/dxnTH0YfbX30oSu95YgdwUBfTKQTNre2pR4spQ/RX2l5PyoxX4.jpg?size=20x20&quality=96&sign=97393bbce30213c930243aa178f6fbec&type=album")
+        $("#password-old").attr("type", "password")
+    })
+
+
+    // Просмотр пароля у поля новый пароль
+    $("#password-new-show").on("click tap", () => {
+        // По нажатию проверка, если инпут внутри с типом "Пароль", то меняется картинка и тип на "Текст"
+        if ($("#password-new").attr("type") === "password") {
+            $("#password-new-show").attr("src", "https://sun9-9.userapi.com/impg/QUqWeT558rMWZb9qXEnFINCBw9GeXUP7kfOABA/ffmOtqJTi_Y.jpg?size=20x20&quality=96&sign=e04699c99774ca3b38a39f486aa17b1a&type=album")
+            $("#password-new").attr("type", "text")
+            return
+        }
+
+        // Если тип "Текст", то возвращаем пароль и иконку открытого глаза
+        $("#password-new-show").attr("src", "https://sun9-22.userapi.com/impg/dxnTH0YfbX30oSu95YgdwUBfTKQTNre2pR4spQ/RX2l5PyoxX4.jpg?size=20x20&quality=96&sign=97393bbce30213c930243aa178f6fbec&type=album")
+        $("#password-new").attr("type", "password")
+    })
+
+
+    // Просмотр пароля у поля повторить пароль
+    $("#password-new-again-show").on("click tap", () => {
+        // По нажатию проверка, если инпут внутри с типом "Пароль", то меняется картинка и тип на "Текст"
+        if ($("#password-new-again").attr("type") === "password") {
+            $("#password-new-again-show").attr("src", "https://sun9-9.userapi.com/impg/QUqWeT558rMWZb9qXEnFINCBw9GeXUP7kfOABA/ffmOtqJTi_Y.jpg?size=20x20&quality=96&sign=e04699c99774ca3b38a39f486aa17b1a&type=album")
+            $("#password-new-again").attr("type", "text")
+            return
+        }
+
+        // Если тип "Текст", то возвращаем пароль и иконку открытого глаза
+        $("#password-new-again-show").attr("src", "https://sun9-22.userapi.com/impg/dxnTH0YfbX30oSu95YgdwUBfTKQTNre2pR4spQ/RX2l5PyoxX4.jpg?size=20x20&quality=96&sign=97393bbce30213c930243aa178f6fbec&type=album")
+        $("#password-new-again").attr("type", "password")
+    })
+</script>
+
+<script>
+    // Рендер профиля
+    function renderUser(data) {
+        // Имя профиля
+        $("#user-name").text(data.name + " " + data.surname)
+
+        $("#profile-name").val(data.name)
+        $("#profile-surname").val(data.surname)
+        $("#profile-phone").val(data.phone)
+        $("#profile-email").val(data.login)
+    }
+
+    renderUser(userData) // Рендерим сразу и после загрузки актуальной информации
+
+    // Получение актуальной информации профиля
+    DBgetUserData((data) => {
+        data.login = userData.login
+        data.password = userData.password
+
+        // Если информация есть - значит данные для входа преждние, сохраняем новую информацию
+        localStorage.setItem("userData", JSON.stringify(data))
+        userData = data
+        renderUser(userData)
+        
+        // И включаем кнопки сохранения
+        $("#profile-save").removeAttr("disabled")
+        $("#password-save").removeAttr("disabled")
+
+        // Рендер диагностик
+        renderDiagnostics()
+    }, (error) => {
+        // Если ошибка - это значит что данные для входа изменились. Удаляем старую информацию и переносим на вход
+        localStorage.removeItem("userData")
+        location.href = "../login"
+    })
+
+    
+    // Отправка формы профиля
+    const profileForm = document.querySelector("#profile-form")
+    profileForm.addEventListener('submit', (event) => {
+        // Отключение базового перехода
+        event.preventDefault()
+
+        // Отключаем кнопку на 2 секунды
+        $("#profile-save").attr("disabled", "disabled")
+        setTimeout(() => {
+            $("#profile-save").removeAttr("disabled")
+        }, 2000)
+
+
+        // Получаем поля из фомы
+        const formData = new FormData(profileForm)
+        const formName = formData.get("profile-name")
+        const formSurname = formData.get("profile-surname")
+        const formPhone = formData.get("profile-phone")
+        const formEmail = formData.get("profile-email")
+
+        // Проверка поля Телефона на регулрном выражении
+        let rePhone = /^[\d\+][\d\(\)\ -]{9,14}\d$/
+        if (!rePhone.test(formPhone)) {
+            inputError("#profile-phone")
+            return
+        }
+
+        // Проверка поля Почты на регулрном выражении
+        let reEmail = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i
+        if (!reEmail.test(formEmail)) {
+            inputError("#profile-email")
+            return
+        }
+
+        // Меняем поля на новые
+        userData.name = formName
+        userData.surname = formSurname
+        userData.phone = formPhone
+
+        let newUserData = Object.assign({}, userData)
+        newUserData.login = formEmail
+
+        // Отправляем изменения
+        DBchangeUserData(newUserData, (data) => {
+            // Меняем логин на новый
+            userData.login = formEmail
+
+            // Если ошибки нету, то сохраняем и обновляем страницу
+            localStorage.setItem("userData", JSON.stringify(userData))
+            
+        }, (error) => {
+            // Если есть где то ошибка то помечаем поля
+            inputError("#profile-email")
+        })
+    })
+    
+
+    // Отправка формы пароля профиля
+    const passwordForm = document.querySelector("#password-form")
+    passwordForm.addEventListener('submit', (event) => {
+        // Отключение базового перехода
+        event.preventDefault()
+
+        // Отключаем кнопку на 2 секунды
+        $("#password-save").attr("disabled", "disabled")
+        setTimeout(() => {
+            $("#password-save").removeAttr("disabled")
+        }, 2000)
+
+
+        // Получаем поля из фомы
+        const formData = new FormData(passwordForm)
+        const oldPass = formData.get("password-old")
+        const newPass = formData.get("password-new")
+        const newPassAgain = formData.get("password-new-again")
+
+        // Если старый пароль не совпадает с текущим
+        if (oldPass !== userData.password) {
+            inputError("#password-old")
+            return
+        }
+
+        // Если новый пароль не совпадает с повтором или длина менее 8 символов
+        if (newPass !== newPassAgain || newPass.length < 8 || newPassAgain.length < 8) {
+            inputError("#password-new")
+            inputError("#password-new-again")
+            return
+        }
+
+        let newUserData = Object.assign({}, userData)
+        newUserData.password = newPass
+
+        // Отправляем изменения
+        DBchangeUserData(newUserData, (data) => {
+            // Меняем пароль на новый
+            userData.password = newPass
+
+            // Если ошибки нету, то сохраняем и обновляем страницу
+            localStorage.setItem("userData", JSON.stringify(userData))
+        
+        }, (error) => {
+            // Если есть где то ошибка то помечаем поля
+            inputError("#password-old")
+            inputError("#password-new")
+            inputError("#password-new-again")
+        })
+    })
+
+    // Все диагностики (Для отображения в карточках)
+    let diagnostics = [
+        {id: 0, title: '43 Профессии', link: 'https://planb123.tilda.ws/43-professions?manager-id='},
+        {id: 1, title: '10 Любимых дел (Детский)', link: 'https://planb123.tilda.ws/10-favorite-things-kid?manager-id='},
+        {id: 2, title: '10 Любимых дел (Взрослый)', link: 'https://planb123.tilda.ws/10-favorite-things?manager-id='},
+        {id: 3, title: 'Идеальная работа (Детский)', link: 'https://planb123.tilda.ws/perfect-job-kid?manager-id='},
+        {id: 4, title: 'Идеальная работа (Взрослый)', link: 'https://planb123.tilda.ws/perfect-job?manager-id='},
+        {id: 5, title: 'Мои потребности (Детский)', link: 'https://planb123.tilda.ws/my-needs-kid?manager-id='},
+        {id: 6, title: 'Мои потребности (Взрослый)', link: 'https://planb123.tilda.ws/my-needs?manager-id='},
+        {id: 7, title: 'Антирейтинг профессий (Детский)', link: 'https://planb123.tilda.ws/antirating-of-professions-kid?manager-id='},
+        {id: 8, title: 'Антирейтинг профессий (Взрослый)', link: 'https://planb123.tilda.ws/antirating-of-professions?manager-id='},
+        {id: 9, title: 'Интервью (Дети, с пояснением к 43 проф.)', link: 'https://planb123.tilda.ws/interview-kid?manager-id='},
+        {id: 10, title: 'Интервью (Для всех возрастов)', link: 'https://planb123.tilda.ws/interview?manager-id='},
+        {id: 11, title: '8 Кадров (Детский)', link: 'https://planb123.tilda.ws/8-frames-kid?manager-id='},
+        {id: 12, title: '8 Кадров (Взрослый)', link: 'https://planb123.tilda.ws/8-frames?manager-id='},
+        {id: 13, title: 'Исследование ценностей', link: 'https://planb123.tilda.ws/exploring-values?manager-id='},
+        {id: 14, title: 'Учебная мотивация', link: 'https://planb123.tilda.ws/learning-motivation?manager-id='}
+    ]
+
+    function renderDiagnostics() {
+        // Очищаем контент перед рендером
+        $("#container-diagnostics .content").html("")
+
+        if (!userData.is_full_access) {
+            for (let i = 1; i < diagnostics.length; i++) {
+                diagnostics[i].link = "Недоступно"
+            }
+        }
+
+        for (diagnostic of diagnostics) {
+            $("#container-diagnostics .content").append(`
+                <div class="diagnostic" id="diagnostic-${diagnostic.id}">
+                    <div class="diagnostic-title">
+                        <p>${diagnostic.title}</p>
+                    </div>
+                    <div class="diagnostic-link">
+                        <p class="p-gray js-diagnostic">${diagnostic.link}</p>
+                    </div>
+                </div>
+            `)
+        }
+
+        // Для всех дигностим ставим id менеджера в конце
+        $(".js-diagnostic").each((i, obj) => {
+            // И ставим id менеджера в конец
+            if ($(obj).text().endsWith("manager-id=")) {
+                $(obj).text($(obj).text() + userData.id)
+            }
+        })
+
+        // Тригерим поиск после поиска даигностики загрузки
+        $("#search-diagnostics").trigger("input")
+    }
+
+    // Рендер диагностик
+    // renderDiagnostics()
+    
+
+    // Поиск по диганостикам срабатывает при обновления поля Поиска
+    $("#search-diagnostics").on("input", () => {
+        if ($("#search-diagnostics").val() === "") {
+            $(".diagnostic").css("display", "flex")
+        } else {
+            $(".diagnostic").css("display", "none")
+            $(".diagnostic").each((i, element) => { 
+                // Если есть совпадение в поле Title, то отображается
+                if ($(element).find(".diagnostic-title").text().toLowerCase().includes($("#search-diagnostics").val().toLowerCase())) {
+                    $(element).css("display", "flex")
+                }
+            })
+        }
+    })
+</script>
+
+<script>
+    // Рендер карточек
+
+    function renderClient(card) {
+        let date = new Date(Number(card.date))
+
+        let cardHours = date.getHours().toString()
+        cardHours = cardHours.length === 1 ? "0" + cardHours : cardHours // В формат 00
+
+        let cardMinutes = date.getMinutes().toString()
+        cardMinutes = cardMinutes.length === 1 ? "0" + cardMinutes : cardMinutes // В формат 00                
+        
+        let cardDay = date.getDate().toString()
+        cardDay = cardDay.length === 1 ? "0" + cardDay : cardDay // В формат 00
+
+        let cardMonth = (date.getMonth() + 1).toString() // Месяц начинается с 0
+        cardMonth = cardMonth.length === 1 ? "0" + cardMonth : cardMonth // В формат 00
+
+        let cardYear = date.getFullYear().toString()
+
+        // Если карточка не в архиве
+        if (!card.in_archive) {
+            $("#container-clients .content").append(`
+                <div class="card" id="card-${card.id}">
+                    <div class="card-left">
+                        <div class="card-left__dot-wrapper">
+                            <div class="card-left__dot ${!card.new && "hidden"}"></div>
+                        </div>
+                        <div class="card-left__content">
+                            <p class="p-gray p-cut js-card-id hidden">${card.id}</p>
+                            <p class="p-cut js-card-name">${card.name}</p>
+                            <p class="hidden js-card-phone">${card.phone}</p>
+                            <p class="hidden js-card-email">${card.email}</p>
+                        </div>
+                    </div>
+                    <div class="card-right__content">
+                        <p class="p-gray">${cardDay}.${cardMonth}.${cardYear}</p>
+                        <p class="p-gray">${cardHours}:${cardMinutes}</p>
+                    </div>
+                </div>
+            `)
+        } else {
+            $("#container-archive .content").append(`
+                <div class="card" id="card-${card.id}">
+                    <div class="card-left">
+                        <div class="card-left__dot-wrapper">
+                            <div class="card-left__dot hidden"></div>
+                        </div>
+                        <div class="card-left__content">
+                            <p class="p-gray p-cut js-card-id hidden">${card.id}</p>
+                            <p class="p-cut js-card-name">${card.name}</p>
+                            <p class="hidden js-card-phone">${card.phone}</p>
+                            <p class="hidden js-card-email">${card.email}</p>
+                        </div>
+                    </div>
+                    <div class="card-right__content">
+                        <p class="p-gray">${cardDay}.${cardMonth}.${cardYear}</p>
+                        <p class="p-gray">${cardHours}:${cardMinutes}</p>
+                    </div>
+                </div>
+            `)
+        }
+    }
+
+    // Функция рендера всех карточек
+    function renderClients(data) {
+        $("#container-clients .content").html("") // Очищаем контент
+        $("#container-archive .content").html("") // Очищаем контент
+
+        // Карточки сортированные по дате от новых к старым
+        let clientsData = data.sort((x,y) => {return x.date - y.date}).reverse()
+
+        // Отделяем обычные от архивных что бы применить на них разные фильтры
+        let cardsClients = clientsData.filter(item => !item.in_archive)
+        let cardsArchive = clientsData.filter(item => item.in_archive)
+
+
+        // Фильтр От
+        if (filterClients.from !== "") {
+            let fromDate = new Date(filterClients.from)
+            cardsClients = cardsClients.filter(card => {return fromDate < card.date})
+        }
+
+        // Фильтр До
+        if (filterClients.to !== "") {
+            let toDate = new Date(filterClients.to)
+            cardsClients = cardsClients.filter(card => {return card.date < toDate})
+        }
+
+        // Фильтр клиентов в алфавитном порядке
+        if (filterClients.filter === "name") {
+            cardsClients = cardsClients.sort((a,b) => {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+            })
+        }
+
+
+        // Фильтр От
+        if (filterArchive.from !== "") {
+            let fromDate = new Date(filterArchive.from)
+            cardsArchive = cardsArchive.filter(card => {return fromDate < card.date})
+        }
+
+        // Фильтр До
+        if (filterArchive.to !== "") {
+            let toDate = new Date(filterArchive.to)
+            cardsArchive = cardsArchive.filter(card => {return card.date < toDate})
+        }
+
+        // Фильтр архива в алфавитном порядке
+        if (filterArchive.filter === "name") {
+            cardsArchive = cardsArchive.sort((a,b) => {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+            })
+        }
+
+        // Рендер обычных карточек
+        for (card of cardsClients) {
+            renderClient(card)
+        }
+
+        // Рендер архивных карточек
+        for (card of cardsArchive) {
+            renderClient(card)
+        }
+        
+
+        // По нажатию на карточку рендер открытой карточки
+        $(`.card`).unbind()
+        $(`.card`).on("click tap", (event) => {
+            renderOpenCard(event.currentTarget.id.split("-")[1]) // Передаем id карточки на которую нажали
+        })
+
+
+        // Тригерим поиск после рендера
+        $("#search-clients").trigger("input")
+        $("#search-archive").trigger("input")
+    }
+
+
+    // id открытой карточки
+    let openedCardId = null
+
+    function renderOpenCard(cardId) {
+        openedCardId = cardId
+        
+        // Находим  списке нужную карточку
+        let card = clients.find(el => el.id === parseInt(cardId))
+
+        // Заполняем открытую карточку
+        $("#open-card-name").text(card.name)
+        $("#open-card-phone").val(card.phone)
+        $("#open-card-email").val(card.email)
+
+        // Открываем карточку
+        $(".container").addClass("hidden")
+        $("#container-open-card").removeClass("hidden")
+
+        $(".results-container").html("") // Очищаем контент перед рендером
+        let results = [...card.results] // Копирование массива
+        for (i in results.reverse()) { // С конца
+            // Получаем название пройденой дигностики
+            let diagnostic = diagnostics.find(el => el.id === results[i]["diagnostic-id"])
+
+            let date = new Date(Number(results[i].date))
+
+            let resultHours = date.getHours().toString()
+            resultHours = resultHours.length === 1 ? "0" + resultHours : resultHours // В формат 00
+
+            let resultMinutes = date.getMinutes().toString()
+            resultMinutes = resultMinutes.length === 1 ? "0" + resultMinutes : resultMinutes // В формат 00                
+            
+            let resultDay = date.getDate().toString()
+            resultDay = resultDay.length === 1 ? "0" + resultDay : resultDay // В формат 00
+
+            let resultMonth = (date.getMonth() + 1).toString() // Месяц начинается с 0
+            resultMonth = resultMonth.length === 1 ? "0" + resultMonth : resultMonth // В формат 00
+
+            let resultYear = date.getFullYear().toString()
+
+            let resultDate = resultDay + "." + resultMonth + "." + resultYear + "   " + resultHours + ":" + resultMinutes
+
+            // Добавляем результат в открытую карточку
+            $(".results-container").append(`
+                <div class="result" id="result-${i}">
+                    <div class="input-block">
+                        <p class="p1-strong">Название диагностики</p>
+                        <input class="p1 input-open-card" readonly value="${diagnostic.title}">
+                    </div>
+                    <div class="input-block">
+                        <p>Дата прохождения</p>
+                        <input class="p1 input-open-card" readonly value="${resultDate}">
+                    </div>
+                    <div class="input-block">
+                        <button class="p1 open-result" id="card-${card.id}-result-${i}">Узнать результаты</button>
+                    </div>
+                </div>
+            `);
+        }
+
+        // По нажатию на Узнать результаты
+        $(`.open-result`).unbind()
+        $(`.open-result`).on("click tap", (event) => {
+            openResults(event.currentTarget.id) // Передаем id кнопки результатов на которую нажали
+        })
+
+
+        // Ставим карточку просмотренной
+        if (card.new) {
+            clients[clients.findIndex(el => el.id === card.id)].new = false // Находим индекс карточки и ставим ее просмотренной
+
+            $(`#card-${card.id}`).find(".card-left__dot").addClass("hidden")
+            newCardCount--
+            $("#clients-count").text(newCardCount);
+
+            // Устанавливаем картчоку просмотренной в базе данных
+            DBsetClientChecked({id: card.id}, (data) => {})
+        }
+        
+
+        // Кнопка назад в открытой карточке
+        $("#container-open-card-back").unbind()
+        $("#container-open-card-back").on("click tap", () => {
+            $(".container").addClass("hidden")
+
+            // Если карточка из общего списка, то открываем его
+            if (!card.in_archive) {
+                $("#container-clients").removeClass("hidden")
+            } else { // Иначе открываем архивы
+                $("#container-archive").removeClass("hidden")
+            }
+        })
+
+
+        $("#container-open-card-archive").css("display", "block")
+
+        // Кнопка в архив
+        $("#container-open-card-archive").unbind()
+        if (!card.in_archive) {
+            $("#container-open-card-archive").on("click tap", () => {
+                $("#container-open-card-archive").css("display", "none")
+                DBsetClientArchive({id: card.id}, (data) => {
+                    clients[clients.findIndex(el => el.id === card.id)].in_archive = true // Находим индекс карточки и ставим ее в архив
+                    renderClients(clients)
+                })
+            })
+
+        } else { // Иначе возвращаем кнопку из архива
+            $("#container-open-card-archive").on("click tap", () => {
+                $("#container-open-card-archive").css("display", "none")
+                DBsetClientArchive({id: card.id}, (data) => {
+                    clients[clients.findIndex(el => el.id === card.id)].in_archive = false
+                    renderClients(clients)
+                })
+            })
+        }
+    }
+
+
+    // Поиск по клиентам срабатывает при обновления поля Поиска
+    $("#search-clients").on("input", () => {
+        if ($("#search-clients").val() === "") {
+            $("#container-clients .content .card").css("display", "flex")
+        } else {
+            $("#container-clients .content .card").css("display", "none")
+            $("#container-clients .content .card").each((i, element) => { 
+                // Если есть совпадение в поле Имя карточки, то отображается
+                if ($(element).find(".js-card-name").text().toLowerCase().includes($("#search-clients").val().toLowerCase())) {
+                    $(element).css("display", "flex")
+                }
+
+                // Поиск по номеру карточки
+                if ($(element).find(".js-card-id").text().toLowerCase().includes($("#search-clients").val().toLowerCase())) {
+                    $(element).css("display", "flex")
+                }
+
+                // Поиск по номеру
+                if ($(element).find(".js-card-phone").text().toLowerCase().includes($("#search-clients").val().toLowerCase())) {
+                    $(element).css("display", "flex")
+                }
+
+                // Поиск по почте
+                if ($(element).find(".js-card-email").text().toLowerCase().includes($("#search-clients").val().toLowerCase())) {
+                    $(element).css("display", "flex")
+                }
+            })
+        }
+    })
+
+
+    // Поиск по Архиву клиентам срабатывает при обновления поля Поиска
+    $("#search-archive").on("input", () => {
+        if ($("#search-archive").val() === "") {
+            $("#container-archive .content .card").css("display", "flex")
+        } else {
+            $("#container-archive .content .card").css("display", "none")
+            $("#container-archive .content .card").each((i, element) => { 
+                // Если есть совпадение в поле Имя карточки, то отображается
+                if ($(element).find(".js-card-name").text().toLowerCase().includes($("#search-archive").val().toLowerCase())) {
+                    $(element).css("display", "flex")
+                }
+
+                // Поиск по номеру карточки
+                if ($(element).find(".js-card-id").text().toLowerCase().includes($("#search-archive").val().toLowerCase())) {
+                    $(element).css("display", "flex")
+                }
+
+                // Поиск по номеру
+                if ($(element).find(".js-card-phone").text().toLowerCase().includes($("#search-archive").val().toLowerCase())) {
+                    $(element).css("display", "flex")
+                }
+
+                // Поиск по почте
+                if ($(element).find(".js-card-email").text().toLowerCase().includes($("#search-archive").val().toLowerCase())) {
+                    $(element).css("display", "flex")
+                }
+            })
+        }
+    })
+
+
+    let clients = {}
+    let newCardCount = 0 // Колличество новых карточек
+    
+    // Получаем всех клиентов
+    DBgetClients((data) => {
+        // Если data undefined (Нету клиентов), то пустой массив
+        clients = data !== undefined ? data : []
+
+        // Ставим колличество новых карточек
+        newCardCount = clients.filter(item => item.new && !item.in_archive).length
+        $("#clients-count").text(newCardCount);
+
+        // Рендерим список
+        renderClients(clients)
+    })
+</script>
+
+<script>
+    // Фильтры
+
+    let filterClients = {
+        filter: "date",
+        from: "",
+        to: "",
+    }
+
+    let filterArchive = {
+        filter: "date",
+        from: "",
+        to: "",
+    }
+
+
+    // Выбраная вкладка для рендера клиенты или архив
+    function renderFilter(filterName) {
+        // Если фильтер clients
+        if (filterName === "clients") {
+            // Если выбран фильтр даты, то ставим выбраным дату
+            if (filterClients.filter === "date") {
+                $("#filter-date").prop("checked", true)
+                $("#filter-name").prop("checked", false)
+            } else {
+                $("#filter-date").prop("checked", false)
+                $("#filter-name").prop("checked", true)
+            }
+
+            $("#filter-date-from").val(filterClients.from)
+            $("#filter-date-to").val(filterClients.to)
+
+            // Ставим что кнопка Применить сохранит в фильтр клиенов
+            $("#filter-submit").unbind()
+            $("#filter-submit").on("click tap", () => {
+                filterClients.filter = $(`input[type="radio"][name="filter-type"]:checked`).val()
+                filterClients.from = $("#filter-date-from").val()
+                filterClients.to = $("#filter-date-to").val()
+
+                // Рендерим список всех клиентов
+                $("#filter-wrapper").css("display", "none")
+                renderClients(clients)
+            })
+
+            // Кнопка ресета
+            $("#filter-reset").unbind()
+            $("#filter-reset").on("click tap", () => {
+                filterClients.filter = "date"
+                filterClients.from = ""
+                filterClients.to = ""
+                renderFilter("clients")
+            })
+            
+        } else { // Фильтры архива
+            // Если выбран фильтр даты, то ставим выбраным дату
+            if (filterArchive.filter === "date") {
+                $("#filter-date").prop("checked", true)
+                $("#filter-name").prop("checked", false)
+            } else {
+                $("#filter-date").prop("checked", false)
+                $("#filter-name").prop("checked", true)
+            }
+
+            $("#filter-date-from").val(filterArchive.from)
+            $("#filter-date-to").val(filterArchive.to)
+
+            // Ставим что кнопка Применить сохранит в фильтр архива
+            $("#filter-submit").unbind()
+            $("#filter-submit").on("click tap", () => {
+                filterArchive.filter = $(`input[type="radio"][name="filter-type"]:checked`).val()
+                filterArchive.from = $("#filter-date-from").val()
+                filterArchive.to = $("#filter-date-to").val()
+
+                // Рендерим список всех клиентов
+                $("#filter-wrapper").css("display", "none")
+                renderClients(clients)
+            })
+
+            // Кнопка ресета
+            $("#filter-reset").unbind()
+            $("#filter-reset").on("click tap", () => {
+                filterArchive.filter = "date"
+                filterArchive.from = ""
+                filterArchive.to = ""
+                renderFilter("archive")
+            })
+        }
+    }
+
+
+    // Кнопка фильтры в клиентах
+    $("#filter-clients").on("click tap", (event) => {
+        renderFilter("clients")
+        $("#filter-wrapper").css("display", "flex")
+    })
+
+    // Кнопка фильтры в архиве
+    $("#filter-archive").on("click tap", (event) => {
+        renderFilter("archive")
+        $("#filter-wrapper").css("display", "flex")
+    })
+
+    // При нажатие на обвертку модальное окно закрывается
+    $("#filter-wrapper").on("click tap", (event) => {
+        // Если клик непосредственно на обвертку
+        if (event.target.id === "filter-wrapper") {
+            $("#filter-wrapper").css("display", "none")
+        }
+    })
+</script>
+
+<script>
+    // Открытие результатов
+    function openResults(resultId) {
+        resultId = resultId.split("-")
+        window.open(`../results?id=${resultId[1]}_${resultId[3]}`, "_blank")
+    }
+
+    // Открытие всех результатов
+    $("#open-all-results").on("click tap", () => {
+        window.open(`../results?id=${openedCardId}`, "_blank")
+    })
+</script>
